@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Druida
+  m_Controller: {fileID: 9100000, guid: c0b3e88edb889db4085f439f24152e0b, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 9924efc5a05ad0f4f8f754251460a208, type: 3}
+    m_OverrideClip: {fileID: 3949099923695544955, guid: a32c24fd8e00edf4ca2d998f41811407, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 92a1d8a51a477964c8498902cce8c3dc, type: 3}
+    m_OverrideClip: {fileID: 7130712313938180349, guid: a32c24fd8e00edf4ca2d998f41811407, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 56f6c28f8d3e5cc4096dc9920da00e85, type: 3}
+    m_OverrideClip: {fileID: -5935921588394263188, guid: a32c24fd8e00edf4ca2d998f41811407, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 15c9e827a798e344d8599a2db38e91d1, type: 3}
+    m_OverrideClip: {fileID: 4647358958876419415, guid: a32c24fd8e00edf4ca2d998f41811407, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 953c79331148baa45a1fa3619af15fdd, type: 3}
+    m_OverrideClip: {fileID: 4944188790764491620, guid: a32c24fd8e00edf4ca2d998f41811407, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: fbf6bebcf5fec6b43bc745dea8440094, type: 3}
+    m_OverrideClip: {fileID: 4852753903532810646, guid: a32c24fd8e00edf4ca2d998f41811407, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 034905f5103480d46afa8a6339cf52f5, type: 3}
+    m_OverrideClip: {fileID: -537173538371957413, guid: a32c24fd8e00edf4ca2d998f41811407, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: b5dbeadde1e436448a189608ad81bd86, type: 3}
+    m_OverrideClip: {fileID: 8965550757735510817, guid: a32c24fd8e00edf4ca2d998f41811407, type: 3}

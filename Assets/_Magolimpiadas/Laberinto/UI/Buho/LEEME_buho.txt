@@ -1,0 +1,16 @@
+BÚHO MAGO · hojas para Unity
+
+Texture Type: Sprite (2D and UI) · Sprite Mode: Multiple · Filter Mode: Point (no filter) · Compression: None
+Pixels Per Unit: el mismo valor que usas en los magos (ej. 100).
+Sprite Editor > Slice > Grid By Cell Size con la celda de la tabla · Offset 0,0 · Padding 0,0 · Pivot Custom con el valor de la tabla.
+Cada hoja es una sola fila de frames en orden. El búho mide ~220 px con el sombrero.
+
+Archivo                      Celda      Frames  Pivot              FPS sugeridos
+buho_idle_hablar.png         256 x 256  6       X 0.5 · Y 0.0391  8 (en bucle mientras habla)
+buho_senalar_izq.png         256 x 256  6       X 0.5 · Y 0.0391  10 (puede quedarse en el último frame)
+buho_senalar_der.png         256 x 256  6       X 0.5 · Y 0.0391  10 (puede quedarse en el último frame)
+buho_vuelo.png               256 x 264  8       X 0.5 · Y 0.0379  12
+
+Notas:
+- En las animaciones de pie la cabeza queda fija: solo se mueven el pico y las alas.
+- En el vuelo se conserva el movimiento dibujado (se voltea, aletea, gira y vuelve a pararse).

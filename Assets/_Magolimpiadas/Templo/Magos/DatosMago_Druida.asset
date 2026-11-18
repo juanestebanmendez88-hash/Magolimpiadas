@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7516667245ba10e46b9e140033d6709b, type: 3}
+  m_Name: DatosMago_Druida
+  m_EditorClassIdentifier: Assembly-CSharp::MageData
+  displayName: Druida Verde
+  element: 3
+  color: {r: 0.55, g: 0.9, b: 0.2, a: 1}
+  maxHealth: 100
+  walkSpeed: 4.5
+  runSpeed: 7.5
+  acceleration: 60
+  airAcceleration: 35
+  jumpHeight: 3.2
+  gravity: 30
+  fallMultiplier: 1.5
+  maxFallSpeed: 20
+  jumpMargin: 0.12
+  jumpMemory: 0.12
+  idle:
+    frames:
+    - {fileID: 5246977384420871120, guid: 5e4048346a8722845b671d24ec7bf089, type: 3}
+    - {fileID: -1493262252, guid: 5e4048346a8722845b671d24ec7bf089, type: 3}
+    - {fileID: -1257483485, guid: 5e4048346a8722845b671d24ec7bf089, type: 3}
+    - {fileID: 295587917, guid: 5e4048346a8722845b671d24ec7bf089, type: 3}
+    - {fileID: 1897552924, guid: 5e4048346a8722845b671d24ec7bf089, type: 3}
+    - {fileID: -1867073792, guid: 5e4048346a8722845b671d24ec7bf089, type: 3}
+    fps: 8
+    repeat: 1
+  walk:
+    frames:
+    - {fileID: -2211770784755075745, guid: be8c35e6972bceb4b94df1d67830ddc6, type: 3}
+    - {fileID: 1686275842, guid: be8c35e6972bceb4b94df1d67830ddc6, type: 3}
+    - {fileID: 957898204, guid: be8c35e6972bceb4b94df1d67830ddc6, type: 3}
+    - {fileID: -83928655, guid: be8c35e6972bceb4b94df1d67830ddc6, type: 3}
+    - {fileID: 1755904577, guid: be8c35e6972bceb4b94df1d67830ddc6, type: 3}
+    - {fileID: -89526655, guid: be8c35e6972bceb4b94df1d67830ddc6, type: 3}
+    fps: 10
+    repeat: 1
+  run:
+    frames:
+    - {fileID: 1153536178248951056, guid: c811c4037c03b854a8f022b0445cc987, type: 3}
+    - {fileID: 1874581789, guid: c811c4037c03b854a8f022b0445cc987, type: 3}
+    - {fileID: 703510378, guid: c811c4037c03b854a8f022b0445cc987, type: 3}
+    - {fileID: -1586685992, guid: c811c4037c03b854a8f022b0445cc987, type: 3}
+    - {fileID: -987582266, guid: c811c4037c03b854a8f022b0445cc987, type: 3}
+    - {fileID: -902962155, guid: c811c4037c03b854a8f022b0445cc987, type: 3}
+    fps: 13
+    repeat: 1
+  air:
+    frames:
+    - {fileID: 1153536178248951056, guid: c811c4037c03b854a8f022b0445cc987, type: 3}
+    fps: 1
+    repeat: 1
+  attack:
+    frames:
+    - {fileID: -1234868990623540988, guid: 8f35bbf66433ff847b652b135cfa0ce3, type: 3}
+    - {fileID: -1762062055, guid: 8f35bbf66433ff847b652b135cfa0ce3, type: 3}
+    - {fileID: 860497362, guid: 8f35bbf66433ff847b652b135cfa0ce3, type: 3}
+    - {fileID: -1059165436, guid: 8f35bbf66433ff847b652b135cfa0ce3, type: 3}
+    - {fileID: 763204480, guid: 8f35bbf66433ff847b652b135cfa0ce3, type: 3}
+    - {fileID: -533650605, guid: 8f35bbf66433ff847b652b135cfa0ce3, type: 3}
+    fps: 12
+    repeat: 0
+  attackLaunchFrame: 4
+  climb:
+    frames:
+    - {fileID: 800292692584520977, guid: a2b0726f17c943b4c86db0168013fe2b, type: 3}
+    - {fileID: -1463370678, guid: a2b0726f17c943b4c86db0168013fe2b, type: 3}
+    - {fileID: -945520834, guid: a2b0726f17c943b4c86db0168013fe2b, type: 3}
+    - {fileID: 1654436395, guid: a2b0726f17c943b4c86db0168013fe2b, type: 3}
+    - {fileID: -215666029, guid: a2b0726f17c943b4c86db0168013fe2b, type: 3}
+    - {fileID: -894142020, guid: a2b0726f17c943b4c86db0168013fe2b, type: 3}
+    fps: 10
+    repeat: 1
+  bowIdle:
+    frames:
+    - {fileID: 5578384245580534665, guid: 7ccb86d111374c042aa8608d4da032e7, type: 3}
+    - {fileID: -2109405793, guid: 7ccb86d111374c042aa8608d4da032e7, type: 3}
+    - {fileID: -20279469, guid: 7ccb86d111374c042aa8608d4da032e7, type: 3}
+    - {fileID: 126182380, guid: 7ccb86d111374c042aa8608d4da032e7, type: 3}
+    - {fileID: -787928968, guid: 7ccb86d111374c042aa8608d4da032e7, type: 3}
+    - {fileID: 1701720563, guid: 7ccb86d111374c042aa8608d4da032e7, type: 3}
+    fps: 8
+    repeat: 1
+  walkBow:
+    frames:
+    - {fileID: 626577906435406700, guid: 068a538b97a6e7d4b8d7b9b32065ac97, type: 3}
+    - {fileID: -485298941, guid: 068a538b97a6e7d4b8d7b9b32065ac97, type: 3}
+    - {fileID: 1394571107, guid: 068a538b97a6e7d4b8d7b9b32065ac97, type: 3}
+    - {fileID: -487381599, guid: 068a538b97a6e7d4b8d7b9b32065ac97, type: 3}
+    - {fileID: 1730771692, guid: 068a538b97a6e7d4b8d7b9b32065ac97, type: 3}
+    - {fileID: -1410721218, guid: 068a538b97a6e7d4b8d7b9b32065ac97, type: 3}
+    fps: 10
+    repeat: 1
+  runBow:
+    frames:
+    - {fileID: 8928624060928555983, guid: 07809c6bccec2b84fa44442ed4345f33, type: 3}
+    - {fileID: -1354217443, guid: 07809c6bccec2b84fa44442ed4345f33, type: 3}
+    - {fileID: -470729688, guid: 07809c6bccec2b84fa44442ed4345f33, type: 3}
+    - {fileID: -1561457355, guid: 07809c6bccec2b84fa44442ed4345f33, type: 3}
+    - {fileID: -1726985723, guid: 07809c6bccec2b84fa44442ed4345f33, type: 3}
+    - {fileID: -55282026, guid: 07809c6bccec2b84fa44442ed4345f33, type: 3}
+    fps: 13
+    repeat: 1
+  airBow:
+    frames:
+    - {fileID: 8928624060928555983, guid: 07809c6bccec2b84fa44442ed4345f33, type: 3}
+    fps: 1
+    repeat: 1
+  bowShot:
+    frames:
+    - {fileID: 4350421401738316727, guid: 78c8ebceb7bbbf04d9df01eebdc62e5c, type: 3}
+    - {fileID: -1643992972, guid: 78c8ebceb7bbbf04d9df01eebdc62e5c, type: 3}
+    - {fileID: -304374176, guid: 78c8ebceb7bbbf04d9df01eebdc62e5c, type: 3}
+    - {fileID: -333914419, guid: 78c8ebceb7bbbf04d9df01eebdc62e5c, type: 3}
+    - {fileID: 1449873551, guid: 78c8ebceb7bbbf04d9df01eebdc62e5c, type: 3}
+    - {fileID: -1879956924, guid: 78c8ebceb7bbbf04d9df01eebdc62e5c, type: 3}
+    fps: 16
+    repeat: 0
+  arrowLaunchFrame: 4
+  power:
+    element: 3
+    color: {r: 0.55, g: 0.9, b: 0.2, a: 1}
+    speed: 13
+    reach: 11
+    size: 0.7
+    damage: 10
+    slows: 0
+  attackWait: 0.25
+  shotPoint: {x: 1, y: 1}
+  hasSecondaryPower: 0
+  secondaryPower:
+    element: 5
+    color: {r: 0.55, g: 0.85, b: 1, a: 1}
+    speed: 14
+    reach: 12
+    size: 0.6
+    damage: 10
+    slows: 1
+  secondaryAttack:
+    frames: []
+    fps: 10
+    repeat: 1
+  secondaryLaunchFrame: 3
+  arrow: {fileID: 188375307, guid: c9e60aeac7a0ae447b1e5a0c72e2e78b, type: 3}
+  arrowSpeed: 20
+  arrowReach: 18

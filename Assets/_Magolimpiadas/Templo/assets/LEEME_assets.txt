@@ -1,0 +1,128 @@
+ASSETS DEL TEMPLO - Unity
+==========================
+
+Escala: 1 tile = 64 px. Usa Pixels Per Unit = 64, Filter Mode Point (no filter), Compression None.
+
+TILES
+  tileset_64.png -> Sprite Mode Multiple -> Sprite Editor -> Slice -> Grid By Cell Size 64x64 (offset 0, padding 0).
+  Arrastra el atlas a una Tile Palette. Las piezas grandes quedan partidas en celdas de 64 que se pintan juntas.
+  Las piezas _izq / _centro / _der encajan: repite el centro y cierra con las puntas.
+  Tambien vienen sueltas en la carpeta tiles/ (cada una mide un multiplo exacto de 64).
+  Atlas: 1536x3200 px (24x50 tiles). Posicion de cada pieza (columna, fila desde arriba):
+  suelo_tapa_izq           3x1 tiles   celda inicial (col 0, fila 0)
+  suelo_tapa_centro        3x1 tiles   celda inicial (col 4, fila 0)
+  suelo_tapa_der           3x1 tiles   celda inicial (col 8, fila 0)
+  suelo_relleno_izq        3x1 tiles   celda inicial (col 12, fila 0)
+  suelo_relleno_centro     3x1 tiles   celda inicial (col 16, fila 0)
+  suelo_relleno_der        3x1 tiles   celda inicial (col 20, fila 0)
+  suelo_base_izq           3x1 tiles   celda inicial (col 0, fila 2)
+  suelo_base_centro        3x1 tiles   celda inicial (col 4, fila 2)
+  suelo_base_der           3x1 tiles   celda inicial (col 8, fila 2)
+  columna_arriba           3x1 tiles   celda inicial (col 12, fila 2)
+  columna_fuste            3x1 tiles   celda inicial (col 16, fila 2)
+  columna_abajo            3x1 tiles   celda inicial (col 20, fila 2)
+  repisa_punta_izq         1x1 tiles   celda inicial (col 0, fila 4)
+  repisa_tramo             1x1 tiles   celda inicial (col 2, fila 4)
+  repisa_punta_der         1x1 tiles   celda inicial (col 4, fila 4)
+  repisa_mensula           1x1 tiles   celda inicial (col 6, fila 4)
+  pilar_izq                2x3 tiles   celda inicial (col 8, fila 4)
+  pilar_der                2x3 tiles   celda inicial (col 11, fila 4)
+  pilar_tapa               3x3 tiles   celda inicial (col 14, fila 4)
+  pilar_medio              3x3 tiles   celda inicial (col 18, fila 4)
+  pilar_base               3x3 tiles   celda inicial (col 0, fila 8)
+  cornisa_izq              3x1 tiles   celda inicial (col 4, fila 8)
+  cornisa_centro           3x1 tiles   celda inicial (col 8, fila 8)
+  cornisa_der              3x1 tiles   celda inicial (col 12, fila 8)
+  cornisa_corta            2x1 tiles   celda inicial (col 16, fila 8)
+  repisa_mensula_izq       3x2 tiles   celda inicial (col 19, fila 8)
+  repisa_mensula_der       3x2 tiles   celda inicial (col 0, fila 12)
+  isla_flotante            5x2 tiles   celda inicial (col 4, fila 12)
+  muro_tapa_izq            3x3 tiles   celda inicial (col 10, fila 12)
+  muro_tapa_centro         3x3 tiles   celda inicial (col 14, fila 12)
+  muro_tapa_der            3x3 tiles   celda inicial (col 18, fila 12)
+  ladrillos                3x3 tiles   celda inicial (col 0, fila 16)
+  muro_base_izq            3x3 tiles   celda inicial (col 4, fila 16)
+  muro_base_centro         3x3 tiles   celda inicial (col 8, fila 16)
+  muro_base_der            3x3 tiles   celda inicial (col 12, fila 16)
+  esquina_L_izq            3x3 tiles   celda inicial (col 16, fila 16)
+  esquina_L_der            3x3 tiles   celda inicial (col 20, fila 16)
+  ladrillos_agrietados     3x3 tiles   celda inicial (col 0, fila 20)
+  muro_tapa_liana_izq      3x3 tiles   celda inicial (col 4, fila 20)
+  muro_tapa_liana_centro   3x3 tiles   celda inicial (col 8, fila 20)
+  muro_tapa_liana_der      3x3 tiles   celda inicial (col 12, fila 20)
+  pilar_liana_izq          2x3 tiles   celda inicial (col 16, fila 20)
+  lianas_colgantes         3x3 tiles   celda inicial (col 19, fila 20)
+  pilar_liana_der          2x3 tiles   celda inicial (col 0, fila 24)
+  escalera_sube_der        3x3 tiles   celda inicial (col 3, fila 24)
+  escalera_sube_izq        3x3 tiles   celda inicial (col 7, fila 24)
+  columna                  2x3 tiles   celda inicial (col 11, fila 24)
+  columna_capitel          3x3 tiles   celda inicial (col 14, fila 24)
+  columna_rota             3x2 tiles   celda inicial (col 18, fila 24)
+  bloque_laurel            3x2 tiles   celda inicial (col 0, fila 28)
+  placa_runa               3x1 tiles   celda inicial (col 4, fila 28)
+  losa_agrietada           3x1 tiles   celda inicial (col 8, fila 28)
+  franja_greca             3x1 tiles   celda inicial (col 12, fila 28)
+  hielo_izq                3x2 tiles   celda inicial (col 16, fila 28)
+  hielo_centro             3x2 tiles   celda inicial (col 20, fila 28)
+  hielo_der                3x2 tiles   celda inicial (col 0, fila 31)
+  muro_alto_izq            3x3 tiles   celda inicial (col 4, fila 31)
+  muro_alto_centro         3x3 tiles   celda inicial (col 8, fila 31)
+  muro_alto_der            3x3 tiles   celda inicial (col 12, fila 31)
+  liana_superior           2x7 tiles   celda inicial (col 16, fila 31)
+  liana_media_1            2x7 tiles   celda inicial (col 19, fila 31)
+  liana_media_2            2x7 tiles   celda inicial (col 22, fila 31)
+  liana_inferior           3x7 tiles   celda inicial (col 0, fila 39)
+  liana_fina_colgante      2x7 tiles   celda inicial (col 4, fila 39)
+  liana_fina_completa      2x7 tiles   celda inicial (col 7, fila 39)
+  agua_superficie_1        3x3 tiles   celda inicial (col 10, fila 39)
+  agua_superficie_2        3x3 tiles   celda inicial (col 14, fila 39)
+  agua_superficie_3        3x3 tiles   celda inicial (col 18, fila 39)
+  agua_profunda_1          3x3 tiles   celda inicial (col 0, fila 47)
+  agua_profunda_2          3x3 tiles   celda inicial (col 4, fila 47)
+  agua_profunda_3          3x3 tiles   celda inicial (col 8, fila 47)
+
+PIEZAS MODULARES (las recomendadas para armar):
+  Suelo: suelo_tapa_* (1 fila) / suelo_relleno_* (repetir hacia abajo) / suelo_base_* (1 fila); a lo ancho izq + centro (repetir) + der.
+  Columna: columna_arriba / columna_fuste (repetir, 1 tile de alto) / columna_abajo.
+  Pilar: pilar_tapa / pilar_medio (repetir) / pilar_base.
+  Repisa: repisa_punta_izq + repisa_tramo (repetir) + repisa_punta_der; repisa_mensula debajo como soporte.
+  Cornisa: cornisa_izq + cornisa_centro (repetir) + cornisa_der. cornisa_corta es una pieza suelta.
+
+AGUA ANIMADA
+  agua_superficie_1..3 y agua_profunda_1..3 (3x3 tiles). En Unity: Animated Tile con los 3 frames a 4 fps,
+  en un Tilemap detras del terreno. Se repiten sin costura hacia los lados (y la profunda tambien hacia abajo).
+
+LIANAS
+  Tramos de 7 tiles de alto: liana_superior -> liana_media_1/2 (repetir) -> liana_inferior.
+  Ponlas en un Tilemap aparte encima del terreno, sin collider.
+
+OBJETOS Y ANIMACIONES (carpeta objetos/)
+  Cada hoja es una fila de frames del mismo tamano. Slice -> Grid By Cell Size con el ancho y alto indicados.
+  Los estados y la animacion de un mismo objeto comparten tamano de celda: se cambian sin que el objeto se mueva.
+
+  moneda.png               celda 64x64 px (1x1 tiles), 12 frame(s), 12 fps, pivot Center
+  antorcha_columna.png     celda 128x320 px (2x5 tiles), 4 frame(s), 8 fps, pivot Bottom Center
+  antorcha_pared.png       celda 128x192 px (2x3 tiles), 4 frame(s), 8 fps, pivot Bottom Center
+  portal.png               celda 256x320 px (4x5 tiles), 2 frame(s), pivot Bottom Center | estados: 1=Activo, 2=Apagado
+  portal_anim.png          celda 256x320 px (4x5 tiles), 8 frame(s), 10 fps, pivot Bottom Center
+  puerta_elemental.png     celda 256x576 px (4x9 tiles), 2 frame(s), pivot Bottom Center | estados: 1=Encendida, 2=Apagada
+  placa_elemental.png      celda 768x192 px (12x3 tiles), 2 frame(s), pivot Bottom Center | estados: 1=Encendida, 2=Apagada
+  pebetero.png             celda 384x448 px (6x7 tiles), 2 frame(s), pivot Bottom Center | estados: 1=Encendido, 2=Apagado
+  pebetero_anim.png        celda 384x448 px (6x7 tiles), 8 frame(s), 10 fps, pivot Bottom Center
+  espinas.png              celda 320x192 px (5x3 tiles), 3 frame(s), pivot Bottom Center | estados: 1=Normal, 2=Ardiendo, 3=Cenizas
+  zarza_prende.png         celda 320x192 px (5x3 tiles), 8 frame(s), 8 fps, pivot Bottom Center
+  zarza_apaga.png          celda 320x192 px (5x3 tiles), 8 frame(s), 8 fps, pivot Bottom Center
+  portal_arco.png          celda 384x576 px (6x9 tiles), 1 frame(s), pivot Bottom Center
+  cristal_rayo.png         celda 128x192 px (2x3 tiles), 2 frame(s), pivot Bottom Center | estados: 1=Apagado, 2=Activo
+  espejo_prisma.png        celda 128x128 px (2x2 tiles), 2 frame(s), pivot Center | estados: 1=Apagado, 2=Activo
+  receptor.png             celda 128x128 px (2x2 tiles), 2 frame(s), pivot Center | estados: 1=Apagado, 2=Activo
+  estandartes.png          celda 320x448 px (5x7 tiles), 3 frame(s), pivot Top Center | estados: 1=Sol, 2=Laurel, 3=Anillos
+  medallas.png             celda 192x256 px (3x4 tiles), 3 frame(s), pivot Center | estados: 1=Oro, 2=Plata, 3=Bronce
+  agua_superficie.png      celda 192x192 px (3x3 tiles), 3 frame(s), 4 fps, pivot Bottom Center
+  agua_profunda.png        celda 192x192 px (3x3 tiles), 3 frame(s), 4 fps, pivot Bottom Center
+  reja.png                 celda 320x640 px (5x10 tiles), 2 frame(s), pivot Bottom Center | estados: 1=Cerrada, 2=Abierta
+  flecha_der.png           celda 128x64 px (2x1 tiles), 4 frame(s), pivot Center | estados: 1=Fuego, 2=Nebulosa, 3=Planta, 4=Hielo
+  flecha_izq.png           celda 128x64 px (2x1 tiles), 4 frame(s), pivot Center | estados: 1=Fuego, 2=Nebulosa, 3=Planta, 4=Hielo
+
+  Tambien van los frames sueltos: <nombre>_1.png, <nombre>_2.png ...
+  Zarza: zarza_prende (normal -> en llamas) y luego zarza_apaga (llamas -> cenizas). El ultimo frame de zarza_apaga = estado Cenizas.

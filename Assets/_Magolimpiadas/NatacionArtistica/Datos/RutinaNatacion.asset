@@ -1,0 +1,707 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b564e4f596e5db4b88ec81c608d43a5, type: 3}
+  m_Name: RutinaNatacion
+  m_EditorClassIdentifier: Assembly-CSharp::SwimmingRoutine
+  song: {fileID: 8300000, guid: fcc1161f1916f3846a57ba557ea5be9d, type: 3}
+  bpm: 151
+  songOffset: 0.296
+  figures:
+  - displayName: "L\xEDnea"
+    formation: 0
+    beats: 56
+    fallBeats: 4.5299997
+    songStart: 6.653616
+    notes:
+    - beat: 4
+      lane: 0
+      type: 0
+    - beat: 6
+      lane: 1
+      type: 0
+    - beat: 8
+      lane: 2
+      type: 0
+    - beat: 10
+      lane: 3
+      type: 0
+    - beat: 12
+      lane: 3
+      type: 0
+    - beat: 14
+      lane: 2
+      type: 0
+    - beat: 16
+      lane: 1
+      type: 0
+    - beat: 18
+      lane: 0
+      type: 0
+    - beat: 20
+      lane: 0
+      type: 0
+    - beat: 22
+      lane: 2
+      type: 0
+    - beat: 24
+      lane: 1
+      type: 0
+    - beat: 26
+      lane: 3
+      type: 0
+    - beat: 28
+      lane: 3
+      type: 0
+    - beat: 30
+      lane: 1
+      type: 0
+    - beat: 32
+      lane: 2
+      type: 0
+    - beat: 34
+      lane: 0
+      type: 0
+    - beat: 36
+      lane: 0
+      type: 0
+    - beat: 38
+      lane: 1
+      type: 0
+    - beat: 40
+      lane: 2
+      type: 0
+    - beat: 42
+      lane: 3
+      type: 0
+    - beat: 44
+      lane: 3
+      type: 0
+    - beat: 46
+      lane: 2
+      type: 0
+    - beat: 48
+      lane: 1
+      type: 0
+    - beat: 50
+      lane: 0
+      type: 0
+    - beat: 52
+      lane: 0
+      type: 0
+    waves: []
+  - displayName: Diamante
+    formation: 1
+    beats: 60
+    fallBeats: 4.1524997
+    songStart: 32.08408
+    notes:
+    - beat: 4
+      lane: 0
+      type: 0
+    - beat: 5
+      lane: 2
+      type: 0
+    - beat: 6
+      lane: 1
+      type: 0
+    - beat: 8
+      lane: 3
+      type: 0
+    - beat: 9
+      lane: 1
+      type: 0
+    - beat: 10
+      lane: 3
+      type: 0
+    - beat: 12
+      lane: -1
+      type: 1
+    - beat: 13
+      lane: 2
+      type: 0
+    - beat: 14
+      lane: 0
+      type: 0
+    - beat: 16
+      lane: 2
+      type: 0
+    - beat: 17
+      lane: 1
+      type: 0
+    - beat: 18
+      lane: 3
+      type: 0
+    - beat: 20
+      lane: 1
+      type: 0
+    - beat: 21
+      lane: 3
+      type: 0
+    - beat: 22
+      lane: 0
+      type: 0
+    - beat: 24
+      lane: -1
+      type: 1
+    - beat: 25
+      lane: 0
+      type: 0
+    - beat: 26
+      lane: 2
+      type: 0
+    - beat: 28
+      lane: 1
+      type: 0
+    - beat: 29
+      lane: 3
+      type: 0
+    - beat: 30
+      lane: 1
+      type: 0
+    - beat: 32
+      lane: 3
+      type: 0
+    - beat: 33
+      lane: 0
+      type: 0
+    - beat: 34
+      lane: 2
+      type: 0
+    - beat: 36
+      lane: -1
+      type: 1
+    - beat: 37
+      lane: 2
+      type: 0
+    - beat: 38
+      lane: 1
+      type: 0
+    - beat: 40
+      lane: 3
+      type: 0
+    - beat: 41
+      lane: 1
+      type: 0
+    - beat: 42
+      lane: 3
+      type: 0
+    - beat: 44
+      lane: 0
+      type: 0
+    - beat: 45
+      lane: 2
+      type: 0
+    - beat: 46
+      lane: 0
+      type: 0
+    - beat: 48
+      lane: -1
+      type: 1
+    - beat: 49
+      lane: 1
+      type: 0
+    - beat: 50
+      lane: 3
+      type: 0
+    - beat: 52
+      lane: 1
+      type: 0
+    - beat: 53
+      lane: 3
+      type: 0
+    - beat: 54
+      lane: 0
+      type: 0
+    - beat: 56
+      lane: 2
+      type: 0
+    - beat: 57
+      lane: -1
+      type: 1
+    waves: []
+  - displayName: Cuadrado
+    formation: 2
+    beats: 64
+    fallBeats: 3.6491668
+    songStart: 59.103947
+    notes:
+    - beat: 4
+      lane: 0
+      type: 0
+    - beat: 5
+      lane: 1
+      type: 0
+    - beat: 6
+      lane: 2
+      type: 0
+    - beat: 6.5
+      lane: 1
+      type: 0
+    - beat: 7
+      lane: 3
+      type: 0
+    - beat: 8
+      lane: 2
+      type: 0
+    - beat: 9
+      lane: 1
+      type: 0
+    - beat: 10
+      lane: 3
+      type: 0
+    - beat: 11
+      lane: 2
+      type: 0
+    - beat: 12
+      lane: 1
+      type: 0
+    - beat: 13
+      lane: 0
+      type: 0
+    - beat: 13.5
+      lane: 2
+      type: 3
+    - beat: 14
+      lane: 1
+      type: 0
+    - beat: 14.5
+      lane: 1
+      type: 0
+    - beat: 15
+      lane: 2
+      type: 0
+    - beat: 16
+      lane: -1
+      type: 1
+    - beat: 17
+      lane: 1
+      type: 0
+    - beat: 18
+      lane: 2
+      type: 2
+    - beat: 19
+      lane: 3
+      type: 0
+    - beat: 20
+      lane: 2
+      type: 0
+    - beat: 21
+      lane: 1
+      type: 0
+    - beat: 22
+      lane: 3
+      type: 0
+    - beat: 22.5
+      lane: 0
+      type: 0
+    - beat: 22.5
+      lane: 1
+      type: 3
+    - beat: 23
+      lane: 2
+      type: 0
+    - beat: 24
+      lane: 1
+      type: 0
+    - beat: 25
+      lane: 0
+      type: 0
+    - beat: 26
+      lane: 1
+      type: 0
+    - beat: 27
+      lane: 2
+      type: 2
+    - beat: 28
+      lane: 0
+      type: 0
+    - beat: 29
+      lane: 1
+      type: 0
+    - beat: 30
+      lane: 2
+      type: 0
+    - beat: 30.5
+      lane: 1
+      type: 0
+    - beat: 31
+      lane: 3
+      type: 0
+    - beat: 32
+      lane: -1
+      type: 1
+    - beat: 33
+      lane: 1
+      type: 0
+    - beat: 34
+      lane: 3
+      type: 0
+    - beat: 35
+      lane: 2
+      type: 0
+    - beat: 36
+      lane: 1
+      type: 0
+    - beat: 37
+      lane: 0
+      type: 2
+    - beat: 38
+      lane: 1
+      type: 0
+    - beat: 38.5
+      lane: 1
+      type: 0
+    - beat: 39
+      lane: 2
+      type: 0
+    - beat: 40
+      lane: 0
+      type: 0
+    - beat: 41
+      lane: 1
+      type: 0
+    - beat: 42
+      lane: 2
+      type: 0
+    - beat: 42.5
+      lane: 1
+      type: 3
+    - beat: 43
+      lane: 3
+      type: 0
+    - beat: 44
+      lane: 2
+      type: 0
+    - beat: 45
+      lane: 1
+      type: 0
+    - beat: 46
+      lane: 3
+      type: 2
+    - beat: 46.5
+      lane: 0
+      type: 0
+    - beat: 47
+      lane: 2
+      type: 0
+    - beat: 48
+      lane: -1
+      type: 1
+    - beat: 49
+      lane: 0
+      type: 0
+    - beat: 50
+      lane: 1
+      type: 0
+    - beat: 51
+      lane: 2
+      type: 0
+    - beat: 51.5
+      lane: 3
+      type: 3
+    - beat: 52
+      lane: 0
+      type: 0
+    - beat: 53
+      lane: 1
+      type: 0
+    - beat: 54
+      lane: 2
+      type: 0
+    - beat: 54.5
+      lane: 1
+      type: 0
+    - beat: 55
+      lane: 3
+      type: 0
+    - beat: 56
+      lane: 2
+      type: 0
+    - beat: 57
+      lane: 1
+      type: 0
+    - beat: 58
+      lane: 3
+      type: 0
+    - beat: 59
+      lane: 2
+      type: 0
+    - beat: 60
+      lane: 1
+      type: 0
+    - beat: 62
+      lane: -1
+      type: 1
+    waves:
+    - 26
+    - 45
+  - displayName: Flor
+    formation: 3
+    beats: 72
+    fallBeats: 3.2716665
+    songStart: 87.71322
+    notes:
+    - beat: 4
+      lane: 0
+      type: 0
+    - beat: 5
+      lane: 1
+      type: 0
+    - beat: 6
+      lane: 2
+      type: 0
+    - beat: 6.5
+      lane: 3
+      type: 0
+    - beat: 7
+      lane: 3
+      type: 0
+    - beat: 8
+      lane: -1
+      type: 1
+    - beat: 9
+      lane: 2
+      type: 0
+    - beat: 10
+      lane: 1
+      type: 0
+    - beat: 10.5
+      lane: 2
+      type: 0
+    - beat: 11
+      lane: 0
+      type: 0
+    - beat: 12
+      lane: 2
+      type: 0
+    - beat: 13
+      lane: 1
+      type: 0
+    - beat: 14
+      lane: 3
+      type: 0
+    - beat: 14.5
+      lane: 0
+      type: 0
+    - beat: 14.5
+      lane: 2
+      type: 3
+    - beat: 15
+      lane: 0
+      type: 0
+    - beat: 16
+      lane: -1
+      type: 1
+    - beat: 17
+      lane: 1
+      type: 2
+    - beat: 18
+      lane: 2
+      type: 0
+    - beat: 18.5
+      lane: 3
+      type: 0
+    - beat: 19
+      lane: 3
+      type: 0
+    - beat: 20
+      lane: 3
+      type: 0
+    - beat: 21
+      lane: 2
+      type: 0
+    - beat: 22
+      lane: 1
+      type: 0
+    - beat: 22.5
+      lane: 2
+      type: 0
+    - beat: 23
+      lane: 0
+      type: 0
+    - beat: 24
+      lane: -1
+      type: 1
+    - beat: 25
+      lane: 1
+      type: 0
+    - beat: 26
+      lane: 3
+      type: 0
+    - beat: 26.5
+      lane: 0
+      type: 0
+    - beat: 27
+      lane: 0
+      type: 0
+    - beat: 28
+      lane: 0
+      type: 0
+    - beat: 29
+      lane: 1
+      type: 0
+    - beat: 29.5
+      lane: 3
+      type: 3
+    - beat: 30
+      lane: 2
+      type: 2
+    - beat: 30.5
+      lane: 3
+      type: 0
+    - beat: 31
+      lane: 3
+      type: 0
+    - beat: 32
+      lane: -1
+      type: 1
+    - beat: 33
+      lane: 2
+      type: 0
+    - beat: 34
+      lane: 1
+      type: 0
+    - beat: 34.5
+      lane: 2
+      type: 0
+    - beat: 35
+      lane: 0
+      type: 0
+    - beat: 36
+      lane: 2
+      type: 0
+    - beat: 37
+      lane: 1
+      type: 0
+    - beat: 38
+      lane: 3
+      type: 0
+    - beat: 38.5
+      lane: 0
+      type: 0
+    - beat: 39
+      lane: 0
+      type: 0
+    - beat: 40
+      lane: -1
+      type: 1
+    - beat: 41
+      lane: 1
+      type: 0
+    - beat: 42
+      lane: 2
+      type: 2
+    - beat: 42.5
+      lane: 3
+      type: 0
+    - beat: 43
+      lane: 3
+      type: 0
+    - beat: 43.5
+      lane: 0
+      type: 3
+    - beat: 44
+      lane: 3
+      type: 0
+    - beat: 45
+      lane: 2
+      type: 0
+    - beat: 46
+      lane: 1
+      type: 0
+    - beat: 46.5
+      lane: 2
+      type: 0
+    - beat: 47
+      lane: 0
+      type: 0
+    - beat: 48
+      lane: -1
+      type: 1
+    - beat: 49
+      lane: 1
+      type: 0
+    - beat: 50
+      lane: 3
+      type: 0
+    - beat: 50.5
+      lane: 0
+      type: 0
+    - beat: 51
+      lane: 0
+      type: 0
+    - beat: 52
+      lane: 0
+      type: 0
+    - beat: 53
+      lane: 1
+      type: 0
+    - beat: 54
+      lane: 2
+      type: 0
+    - beat: 54.5
+      lane: 3
+      type: 0
+    - beat: 55
+      lane: 3
+      type: 2
+    - beat: 56
+      lane: -1
+      type: 1
+    - beat: 57
+      lane: 2
+      type: 0
+    - beat: 58
+      lane: 1
+      type: 0
+    - beat: 58.5
+      lane: 2
+      type: 0
+    - beat: 58.5
+      lane: 3
+      type: 3
+    - beat: 59
+      lane: 0
+      type: 0
+    - beat: 60
+      lane: 2
+      type: 0
+    - beat: 61
+      lane: 1
+      type: 0
+    - beat: 62
+      lane: 3
+      type: 0
+    - beat: 62.5
+      lane: 0
+      type: 0
+    - beat: 63
+      lane: 0
+      type: 0
+    - beat: 64
+      lane: -1
+      type: 1
+    - beat: 65
+      lane: 1
+      type: 0
+    - beat: 66
+      lane: 2
+      type: 0
+    - beat: 66.5
+      lane: 3
+      type: 0
+    - beat: 68
+      lane: -1
+      type: 1
+    waves:
+    - 25
+    - 50

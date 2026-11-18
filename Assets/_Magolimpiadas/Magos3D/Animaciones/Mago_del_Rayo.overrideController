@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Mago_del_Rayo
+  m_Controller: {fileID: 9100000, guid: c0b3e88edb889db4085f439f24152e0b, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 9924efc5a05ad0f4f8f754251460a208, type: 3}
+    m_OverrideClip: {fileID: -8887637512751864039, guid: 47b87ef3825bac24f9c13a60a12e47e7, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 92a1d8a51a477964c8498902cce8c3dc, type: 3}
+    m_OverrideClip: {fileID: 7632986398388763431, guid: 47b87ef3825bac24f9c13a60a12e47e7, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 56f6c28f8d3e5cc4096dc9920da00e85, type: 3}
+    m_OverrideClip: {fileID: 56697504093713641, guid: 47b87ef3825bac24f9c13a60a12e47e7, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 15c9e827a798e344d8599a2db38e91d1, type: 3}
+    m_OverrideClip: {fileID: 4245210452081654635, guid: 47b87ef3825bac24f9c13a60a12e47e7, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 953c79331148baa45a1fa3619af15fdd, type: 3}
+    m_OverrideClip: {fileID: 188104153935852245, guid: 47b87ef3825bac24f9c13a60a12e47e7, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: fbf6bebcf5fec6b43bc745dea8440094, type: 3}
+    m_OverrideClip: {fileID: 7891579458523583440, guid: 47b87ef3825bac24f9c13a60a12e47e7, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 034905f5103480d46afa8a6339cf52f5, type: 3}
+    m_OverrideClip: {fileID: -6366462482457727078, guid: 47b87ef3825bac24f9c13a60a12e47e7, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: b5dbeadde1e436448a189608ad81bd86, type: 3}
+    m_OverrideClip: {fileID: -3984501591727452188, guid: 47b87ef3825bac24f9c13a60a12e47e7, type: 3}

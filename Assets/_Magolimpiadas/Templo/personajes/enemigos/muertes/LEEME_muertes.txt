@@ -1,0 +1,27 @@
+MUERTES DE ENEMIGOS
+===================
+
+Una hoja por enemigo, 6 frames en una sola fila, misma escala que sus
+hojas de idle (0.72 del dibujo original).
+
+  Archivo                        Hoja         Celda        Ancho         Pivote
+  golem_lava_muere.png           3072 x 272   512 x 272   ancho visible 256   pivote Y = 10 px (0.0368)
+  pocion_carmesi_muere.png       3072 x 336   512 x 336   ancho visible 352   pivote Y = 10 px (0.0298)
+  dragon_hielo_muere.png         3072 x 208   512 x 208   ancho visible 304   pivote Y = 10 px (0.0481)
+  espiritu_planta_muere.png      3072 x 320   512 x 320   ancho visible 272   pivote Y = 10 px (0.0312)
+  espectro_carmesi_muere.png     3072 x 312   512 x 312   ancho visible 256   pivote Y = 10 px (0.0321)
+
+AJUSTES EN UNITY
+- Texture Type: Sprite (2D and UI) · Sprite Mode: Multiple
+- Pixels Per Unit: 64 · Filter Mode: Point (no filter) · Compression: None
+- Sprite Editor > Slice > Grid By Cell Size: 512 x (alto de la celda)
+- Pivote: Custom, X = 0.5 y Y = el número de la tabla (en píxeles: X 256, Y 10).
+  La línea del suelo queda a 10 px del borde de abajo, igual que en sus idle,
+  así que al cambiar de idle a muerte el enemigo no se mueve de lugar.
+
+CÓMO USARLAS
+- Reproducir una sola vez (desmarcar Loop Time en el clip), unos 10 fps.
+- El último frame (los restos en el suelo) se puede dejar quieto un momento
+  y luego borrar el enemigo.
+- El Dragón de hielo y el Espíritu de planta empiezan un poco en el aire
+  (como en el dibujo) y caen al suelo durante la animación.

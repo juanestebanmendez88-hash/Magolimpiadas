@@ -1,0 +1,43 @@
+MAPA "MAGOLIMPIADAS" LISTO PARA UNITY
+Autor: Moreno
+
+Este paquete trae el mapa tal como lo armaste en el editor, con todo lo que necesita:
+  Templo/Mapas/mapa_magolimpiadas.json   el mapa (202 x 29 tiles de juego, 506 piezas, 52 objetos, 20 personajes)
+  Templo/Mapas/vista_previa_mapa.png     cómo debe verse
+  Templo/assets/                         tiles, objetos, agua, fondo y el atlas tileset_64.png
+  Templo/personajes/                     las hojas de los magos y enemigos que aparecen en el mapa
+  Templo/Scripts/                        los scripts que arman el mapa
+
+PASOS
+1. Arrastra la carpeta "Templo" completa dentro de la carpeta Assets de tu proyecto de Unity
+   (debe quedar Assets/Templo/assets, Assets/Templo/Scripts, etc.). Espera a que Unity termine de importar.
+   Necesitas el paquete "2D Tilemap Editor" (viene con la plantilla 2D; si no, Window > Package Manager).
+2. Abre (o crea) la escena donde va el nivel.
+3. Menú Tools > Templo > Importar mapa.
+4. En la ventana: arrastra Templo/Mapas/mapa_magolimpiadas.json al campo "Mapa (.json)".
+   "Carpeta del zip" debe decir Assets/Templo. Deja marcado "Colisiones en el terreno".
+5. Pulsa "Construir mapa". La primera vez tarda un poco porque configura y corta todas las texturas.
+
+QUÉ QUEDA EN LA ESCENA
+  Mapa - Magolimpiadas (con un Grid de 1 unidad = 1 tile)
+    Fondo          la imagen del templo detrás de todo (Order in Layer -100)
+    Agua           Tilemap con el agua animada (orden -10, sin colisión)
+    Terreno        Tilemap con suelo, pilares, columnas y plataformas (orden 0, con TilemapCollider2D)
+    Decoracion     Tilemap con las lianas (orden 5, sin colisión)
+    Objetos        portales, reja, flechas, placa, monedas, antorchas... (orden 10)
+    Personajes     los enemigos y "Inicio jugador - <mago>" (orden 20)
+  Los tiles generados se guardan en Assets/Templo/_Generado/Tiles (no los borres).
+
+DESPUÉS DE IMPORTAR
+- Ajusta la Main Camera: Size 8 aprox. para ver ~16 tiles de alto.
+- Para que el terreno sea un solo collider más eficiente: en el objeto Terreno agrega CompositeCollider2D
+  (Rigidbody2D en Static) y marca "Used By Composite" en el TilemapCollider2D.
+- Los objetos y enemigos vienen con el componente SpriteAnimado (animación en bucle). Cuando hagas sus
+  Animator / lógica, cambia ese componente por el tuyo. Para cambiar de estado (portal apagado/activo,
+  reja cerrada/abierta, placa apagada/encendida) cambia el sprite al otro frame de su hoja.
+- "Inicio jugador - ..." marca dónde aparece cada mago: usa su posición como punto de aparición.
+- Las flechas del pilar quedan como sprites: agrégales un BoxCollider2D (o un PlatformEffector2D) para pararse encima.
+- Puedes volver a importar si cambias el mapa en el editor: exporta de nuevo y repite los pasos 3-5
+  (borra antes el mapa viejo de la escena).
+
+Si sale algún error en la Console, cópialo y me lo pasas.

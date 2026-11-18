@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7516667245ba10e46b9e140033d6709b, type: 3}
+  m_Name: DatosMago_Nebulosa
+  m_EditorClassIdentifier: Assembly-CSharp::MageData
+  displayName: Maga Nebulosa
+  element: 2
+  color: {r: 0.72, g: 0.38, b: 1, a: 1}
+  maxHealth: 100
+  walkSpeed: 4.5
+  runSpeed: 7.5
+  acceleration: 60
+  airAcceleration: 35
+  jumpHeight: 3.2
+  gravity: 30
+  fallMultiplier: 1.5
+  maxFallSpeed: 20
+  jumpMargin: 0.12
+  jumpMemory: 0.12
+  idle:
+    frames:
+    - {fileID: -8280387248225682341, guid: 8911985cb9efbf245a0042ef97bccc12, type: 3}
+    - {fileID: 1794336786, guid: 8911985cb9efbf245a0042ef97bccc12, type: 3}
+    - {fileID: 803152498, guid: 8911985cb9efbf245a0042ef97bccc12, type: 3}
+    - {fileID: 883743984, guid: 8911985cb9efbf245a0042ef97bccc12, type: 3}
+    - {fileID: -2079086237, guid: 8911985cb9efbf245a0042ef97bccc12, type: 3}
+    - {fileID: -1075788725, guid: 8911985cb9efbf245a0042ef97bccc12, type: 3}
+    fps: 8
+    repeat: 1
+  walk:
+    frames:
+    - {fileID: -7952092281026180298, guid: e41f6cf5ca7b940419b37130ef967a52, type: 3}
+    - {fileID: 1958569074, guid: e41f6cf5ca7b940419b37130ef967a52, type: 3}
+    - {fileID: -1434810098, guid: e41f6cf5ca7b940419b37130ef967a52, type: 3}
+    - {fileID: -74740464, guid: e41f6cf5ca7b940419b37130ef967a52, type: 3}
+    - {fileID: 1240888605, guid: e41f6cf5ca7b940419b37130ef967a52, type: 3}
+    - {fileID: 456096632, guid: e41f6cf5ca7b940419b37130ef967a52, type: 3}
+    fps: 10
+    repeat: 1
+  run:
+    frames:
+    - {fileID: 1975109040161208637, guid: 5d2c8646946d6374fb5180795d88c11b, type: 3}
+    - {fileID: -455492287, guid: 5d2c8646946d6374fb5180795d88c11b, type: 3}
+    - {fileID: -550693901, guid: 5d2c8646946d6374fb5180795d88c11b, type: 3}
+    - {fileID: -673572187, guid: 5d2c8646946d6374fb5180795d88c11b, type: 3}
+    - {fileID: -1591700394, guid: 5d2c8646946d6374fb5180795d88c11b, type: 3}
+    - {fileID: -579959535, guid: 5d2c8646946d6374fb5180795d88c11b, type: 3}
+    fps: 13
+    repeat: 1
+  air:
+    frames:
+    - {fileID: 1975109040161208637, guid: 5d2c8646946d6374fb5180795d88c11b, type: 3}
+    fps: 1
+    repeat: 1
+  attack:
+    frames:
+    - {fileID: -1395716666653238672, guid: 91396de80dcdfed4ab703163f3b17e88, type: 3}
+    - {fileID: -1772904687, guid: 91396de80dcdfed4ab703163f3b17e88, type: 3}
+    - {fileID: 2045885013, guid: 91396de80dcdfed4ab703163f3b17e88, type: 3}
+    - {fileID: 207300295, guid: 91396de80dcdfed4ab703163f3b17e88, type: 3}
+    - {fileID: -38937128, guid: 91396de80dcdfed4ab703163f3b17e88, type: 3}
+    fps: 12
+    repeat: 0
+  attackLaunchFrame: 4
+  climb:
+    frames:
+    - {fileID: 4459099844997291266, guid: 66f55d2d10bf1ba499c78df6dd5ac499, type: 3}
+    - {fileID: 1180118213, guid: 66f55d2d10bf1ba499c78df6dd5ac499, type: 3}
+    - {fileID: -637010220, guid: 66f55d2d10bf1ba499c78df6dd5ac499, type: 3}
+    - {fileID: 1909425717, guid: 66f55d2d10bf1ba499c78df6dd5ac499, type: 3}
+    - {fileID: -1342776086, guid: 66f55d2d10bf1ba499c78df6dd5ac499, type: 3}
+    - {fileID: -1405616869, guid: 66f55d2d10bf1ba499c78df6dd5ac499, type: 3}
+    fps: 10
+    repeat: 1
+  bowIdle:
+    frames:
+    - {fileID: 1374818170722454562, guid: b9d9f4199b7b36f47934c2422eaf0420, type: 3}
+    - {fileID: 725816201, guid: b9d9f4199b7b36f47934c2422eaf0420, type: 3}
+    - {fileID: -1140206539, guid: b9d9f4199b7b36f47934c2422eaf0420, type: 3}
+    - {fileID: 1302994481, guid: b9d9f4199b7b36f47934c2422eaf0420, type: 3}
+    - {fileID: -55858401, guid: b9d9f4199b7b36f47934c2422eaf0420, type: 3}
+    - {fileID: 363306035, guid: b9d9f4199b7b36f47934c2422eaf0420, type: 3}
+    fps: 8
+    repeat: 1
+  walkBow:
+    frames:
+    - {fileID: 4561791226468796652, guid: 7220ea63e8abce941adada9c420aead2, type: 3}
+    - {fileID: -1104111842, guid: 7220ea63e8abce941adada9c420aead2, type: 3}
+    - {fileID: 1919925534, guid: 7220ea63e8abce941adada9c420aead2, type: 3}
+    - {fileID: 1265578788, guid: 7220ea63e8abce941adada9c420aead2, type: 3}
+    - {fileID: -474982191, guid: 7220ea63e8abce941adada9c420aead2, type: 3}
+    - {fileID: 394653755, guid: 7220ea63e8abce941adada9c420aead2, type: 3}
+    fps: 10
+    repeat: 1
+  runBow:
+    frames:
+    - {fileID: -4945255086702878956, guid: 5080b3b9ea1df8d4c9de1bebf6690ea3, type: 3}
+    - {fileID: -1055256985, guid: 5080b3b9ea1df8d4c9de1bebf6690ea3, type: 3}
+    - {fileID: -234209624, guid: 5080b3b9ea1df8d4c9de1bebf6690ea3, type: 3}
+    - {fileID: -27170172, guid: 5080b3b9ea1df8d4c9de1bebf6690ea3, type: 3}
+    - {fileID: -1200853258, guid: 5080b3b9ea1df8d4c9de1bebf6690ea3, type: 3}
+    - {fileID: -731718569, guid: 5080b3b9ea1df8d4c9de1bebf6690ea3, type: 3}
+    fps: 13
+    repeat: 1
+  airBow:
+    frames:
+    - {fileID: -4945255086702878956, guid: 5080b3b9ea1df8d4c9de1bebf6690ea3, type: 3}
+    fps: 1
+    repeat: 1
+  bowShot:
+    frames:
+    - {fileID: -6590389814899260766, guid: daae1d4c309a83140a0ce069125d2692, type: 3}
+    - {fileID: 1377240925, guid: daae1d4c309a83140a0ce069125d2692, type: 3}
+    - {fileID: -908254705, guid: daae1d4c309a83140a0ce069125d2692, type: 3}
+    - {fileID: -1107271671, guid: daae1d4c309a83140a0ce069125d2692, type: 3}
+    - {fileID: -1333461444, guid: daae1d4c309a83140a0ce069125d2692, type: 3}
+    - {fileID: -915760712, guid: daae1d4c309a83140a0ce069125d2692, type: 3}
+    fps: 16
+    repeat: 0
+  arrowLaunchFrame: 4
+  power:
+    element: 2
+    color: {r: 0.72, g: 0.38, b: 1, a: 1}
+    speed: 14
+    reach: 12
+    size: 0.7
+    damage: 10
+    slows: 0
+  attackWait: 0.25
+  shotPoint: {x: 1, y: 1.05}
+  hasSecondaryPower: 0
+  secondaryPower:
+    element: 5
+    color: {r: 0.55, g: 0.85, b: 1, a: 1}
+    speed: 14
+    reach: 12
+    size: 0.6
+    damage: 10
+    slows: 1
+  secondaryAttack:
+    frames: []
+    fps: 10
+    repeat: 1
+  secondaryLaunchFrame: 3
+  arrow: {fileID: -962253550, guid: c9e60aeac7a0ae447b1e5a0c72e2e78b, type: 3}
+  arrowSpeed: 20
+  arrowReach: 18

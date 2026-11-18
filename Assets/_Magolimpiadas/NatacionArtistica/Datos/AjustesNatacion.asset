@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e61e38b11e3b8e142be8aa40a6d1fdca, type: 3}
+  m_Name: AjustesNatacion
+  m_EditorClassIdentifier: Assembly-CSharp::SwimmingSettings
+  perfectWindow: 0.08
+  goodWindow: 0.16
+  windowDuringWave: 0.5
+  waveBeats: 4
+  audioLatency: 0
+  perfectPoints: 100
+  goodPoints: 60
+  missPoints: 0
+  trapPoints: -80
+  whiteMultiplier: 2
+  goldenBonus: 150
+  hitsPerStar: 8
+  pointsPerStar: 100
+  perfectWeight: 1
+  goodWeight: 0.6
+  trapPenalty: 0.5
+  minAccuracy: 0.6
+  maxRetries: 2
+  countdownBeats: 4
+  transitionSeconds: 4
+  owlsVariation:
+  - -0.3
+  - 0.2
+  - 0
+  - 0.4
+  - -0.5
+  - 0.1
+  - -0.2
+  goldNote: 9
+  silverNote: 7.5
+  bronzeNote: 6
+  botAccuracy: 0.97
+  botsPerfect: 0.8
+  botWhiteAccuracy: 0.985

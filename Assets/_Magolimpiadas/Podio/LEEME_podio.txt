@@ -1,0 +1,43 @@
+PODIO · CELEBRACIÓN, DERROTA Y MEDALLAS
+=======================================
+
+PERSONAJES (de frente, 6 frames en una fila, celdas de 512 de ancho)
+  maga_nebulosa_celebracion.png      3072 x 296   celda 512 x 296   pivote Y 10 px (0.0338)
+  maga_nebulosa_derrota.png          3072 x 264   celda 512 x 264   pivote Y 10 px (0.0379)
+  mago_rayo_celebracion.png          3072 x 296   celda 512 x 296   pivote Y 10 px (0.0338)
+  mago_rayo_derrota.png              3072 x 264   celda 512 x 264   pivote Y 10 px (0.0379)
+  mago_elemental_celebracion.png     3072 x 296   celda 512 x 296   pivote Y 10 px (0.0338)
+  mago_elemental_derrota.png         3072 x 264   celda 512 x 264   pivote Y 10 px (0.0379)
+  druida_verde_celebracion.png       3072 x 296   celda 512 x 296   pivote Y 10 px (0.0338)
+  druida_verde_derrota.png           3072 x 264   celda 512 x 264   pivote Y 10 px (0.0379)
+
+  - celebracion: el salto conserva su altura dentro de la celda (los pies
+    vuelven al suelo en los frames 1, 5 y 6). Se puede poner en bucle.
+  - derrota: termina sentado; reproducir una vez (sin Loop) y dejar el
+    último frame quieto.
+  - Tamaño igual que su idle de frente (238 px de alto de pie).
+  - La línea del suelo queda a 10 px del borde de abajo: pivote X 256 px,
+    Y 10 px.
+
+ESCENARIO
+  podio.png ......... 837 x 290 px
+  Dónde pararse (en píxeles, desde la esquina de arriba a la izquierda):
+    1er lugar: x 418, y 4
+    2do lugar: x 150, y 58
+    3er lugar: x 686, y 99
+  Pon el pivote de cada mago (sus pies) en ese punto, unos 6 px más abajo
+  para que se vean bien apoyados. Ver vista_previa_podio.png.
+
+MEDALLAS (para la interfaz)
+  medallas_natacion.png, medallas_sincronizado.png, medallas_pingpong.png
+  Cada una: 480 x 224, 3 medallas de 160 x 224 en orden oro, plata, bronce.
+
+ENEMIGO
+  cristal_rayo_muere.png .. 3072 x 304, celda 512 x 304, pivote Y 10 px.
+  Reproducir una vez, unos 10 fps.
+
+AJUSTES EN UNITY (todas)
+  Texture Type: Sprite (2D and UI) · Pixels Per Unit: 64
+  Filter Mode: Point (no filter) · Compression: None
+  Hojas: Sprite Mode Multiple · Slice Grid By Cell Size con la celda de arriba.
+  FPS sugeridos: celebración 10 · derrota 8.

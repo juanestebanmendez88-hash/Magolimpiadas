@@ -1,0 +1,188 @@
+HOJAS DE ANIMACIÓN · MAGOS, GUARDIÁN Y ENEMIGOS
+Autor: Moreno
+
+Configuración en el Inspector (todas las hojas de personajes):
+  Texture Type: Sprite (2D and UI) · Sprite Mode: Multiple
+  Pixels Per Unit: el mismo valor en todas (ej. 100) · Filter Mode: Point (no filter) · Compression: None
+  Sprite Editor > Slice > Grid By Cell Size con la celda de la tabla · Offset 0,0 · Padding 0,0
+  Pivot: Custom con el valor de la tabla (Y = distancia de la línea de los pies al borde de abajo / alto).
+  'Center' = nadar (sin suelo, cuerpo centrado).
+
+Cada hoja es una sola fila de frames ya en el orden final. El personaje está centrado en su celda.
+Columna 'Orden original': qué frames de la hoja que me pasaste quedaron y en qué orden.
+Para mirar a la izquierda usa SpriteRenderer.flipX.
+
+MAGO ELEMENTAL  (carpeta personajes/mago_elemental)
+  Archivo                                  Celda       Frames  Pivot                Orden original       Alineación
+  elemental_idle.png                       256 x 256   4       X 0.5 · Y 0.0391     2, 4, 5, 6           pies
+  elemental_idle_con_poderes.png           256 x 256   4       X 0.5 · Y 0.0391     2, 4, 5, 6           pies
+  elemental_idle_de_frente.png             256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  elemental_idle_con_poder_de_frente.png   256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  elemental_idle_de_espaldas.png           256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  elemental_idle_hacia_abajo.png           256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  elemental_idle_con_arco_de_frente.png    256 x 256   5       X 0.5 · Y 0.0391     1, 2, 3, 4, 5        pies
+  elemental_idle_con_arco_de_lado.png      256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  elemental_caminar_de_frente.png          256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_correr_de_frente.png           256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_caminar_de_lado.png            256 x 256   4       X 0.5 · Y 0.0391     1, 2, 3, 4           cabeza
+  elemental_correr_de_lado.png             256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_caminar_con_arco.png           256 x 256   6       X 0.5 · Y 0.0391     1, 3, 4, 6, 7, 8     cabeza
+  elemental_correr_con_arco.png            256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_caminar_con_raqueta.png        272 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_correr_con_raqueta.png         256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_caminar_hacia_arriba.png       256 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  elemental_caminar_hacia_abajo.png        256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_fuego_de_frente.png            264 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_fuego_de_lado.png              392 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_hielo_de_frente.png            264 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_hielo_de_lado.png              320 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_arco_de_lado.png               256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_raqueta_de_frente.png          320 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_raqueta_de_lado.png            336 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_raqueta_de_espaldas_idle.png   264 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_golpe_de_espaldas.png          360 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  elemental_nadar_de_frente.png            280 x 256   6       Center               1, 2, 3, 4, 5, 6     cabeza
+  elemental_nadar_de_lado.png              280 x 256   6       Center               1, 2, 3, 4, 5, 6     cabeza
+  elemental_nadar_de_espaldas.png          312 x 256   6       Center               1, 2, 3, 4, 5, 6     cabeza
+  elemental_escalar_con_arco.png           256 x 288   6       X 0.5 · Y 0.0347     1, 2, 3, 4, 5, 6     cabeza
+
+MAGA NEBULOSA  (carpeta personajes/maga_nebulosa)
+  Archivo                                  Celda       Frames  Pivot                Orden original       Alineación
+  nebulosa_idle.png                        256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  nebulosa_idle_con_ataque.png             304 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  nebulosa_idle_de_lado.png                256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  nebulosa_idle_de_lado_con_poder.png      256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  nebulosa_idle_de_espaldas.png            256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  nebulosa_idle_hacia_abajo.png            256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  nebulosa_idle_con_arco_de_frente.png     256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  nebulosa_idle_con_arco_de_lado.png       256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  nebulosa_caminar_de_frente.png           256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_correr_de_frente.png            256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_caminar_de_lado.png             256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_correr_de_lado.png              256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_caminar_con_arco.png            256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_correr_con_arco.png             256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_caminar_con_raqueta.png         256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_correr_con_raqueta.png          256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_caminar_hacia_arriba.png        256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_caminar_hacia_abajo.png         256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_ataque_de_frente.png            296 x 256   3       X 0.5 · Y 0.0391     2, 3, 4              cabeza
+  nebulosa_ataque_de_lado.png              384 x 256   5       X 0.5 · Y 0.0391     1, 2, 3, 4, 8        cabeza
+  nebulosa_arco_de_frente.png              256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_arco_de_lado.png                256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_raqueta_de_frente.png           312 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_raqueta_de_lado.png             344 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_raqueta_de_espaldas_idle.png    280 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_golpe_de_espaldas.png           376 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_nadar_de_frente.png             312 x 256   6       Center               1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_nadar_de_lado.png               328 x 256   6       Center               1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_nadar_de_espaldas.png           272 x 256   6       Center               1, 2, 3, 4, 5, 6     cabeza
+  nebulosa_escalar_con_arco.png            256 x 288   6       X 0.5 · Y 0.0347     1, 2, 3, 4, 5, 6     cabeza
+
+DRUIDA VERDE  (carpeta personajes/druida_verde)
+  Archivo                                  Celda       Frames  Pivot                Orden original       Alineación
+  druida_idle_de_frente.png                256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  druida_idle_de_frente_con_poder.png      288 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     pies
+  druida_caminar_de_frente.png             256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_correr_de_frente.png              256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_caminar_de_lado.png               256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_correr_de_lado.png                272 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_idle_de_lado.png                  256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  druida_idle_de_lado_con_poder.png        280 x 272   6       X 0.5 · Y 0.0368     1, 2, 3, 4, 5, 6     pies
+  druida_idle_con_arco_de_frente.png       256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  druida_idle_con_arco_de_lado.png         256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  druida_caminar_hacia_arriba.png          256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_caminar_hacia_abajo.png           264 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_arco_de_frente.png                256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_arco_de_lado.png                  256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_raqueta_de_frente.png             360 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_raqueta_de_lado.png               384 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  druida_nadar_de_frente.png               352 x 256   6       Center               1, 2, 3, 4, 5, 6     cabeza
+  druida_nadar_de_lado.png                 352 x 256   6       Center               1, 2, 3, 4, 5, 6     cabeza
+  druida_ataque_de_frente.png              288 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  druida_ataque_de_lado.png                328 x 264   6       X 0.5 · Y 0.0379     7, 2, 3, 9, 4, 10    cabeza
+  druida_idle_hacia_abajo.png              264 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     pies
+  druida_idle_de_espaldas.png              256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  druida_caminar_con_raqueta.png           256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_correr_con_raqueta.png            256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_caminar_con_arco.png              256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_correr_con_arco.png               256 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  druida_raqueta_de_espaldas_idle.png      280 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_golpe_de_espaldas.png             368 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  druida_nadar_de_espaldas.png             288 x 256   6       Center               1, 2, 3, 4, 5, 6     cabeza
+  druida_escalar_con_arco.png              256 x 288   6       X 0.5 · Y 0.0347     1, 2, 3, 4, 5, 6     cabeza
+
+MAGO DEL RAYO  (carpeta personajes/mago_del_rayo)
+  Archivo                                  Celda       Frames  Pivot                Orden original       Alineación
+  rayo_idle_de_frente.png                  256 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     pies
+  rayo_idle_de_frente_con_poder.png        256 x 272   6       X 0.5 · Y 0.0368     1, 2, 3, 4, 5, 6     pies
+  rayo_idle_de_lado.png                    256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     pies
+  rayo_idle_de_lado_con_poder.png          256 x 272   6       X 0.5 · Y 0.0368     1, 2, 3, 4, 5, 6     pies
+  rayo_idle_de_espaldas.png                256 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     pies
+  rayo_idle_hacia_abajo.png                256 x 280   6       X 0.5 · Y 0.0357     1, 2, 3, 4, 5, 6     pies
+  rayo_idle_con_arco_de_frente.png         256 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     pies
+  rayo_idle_con_arco_de_lado.png           256 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     pies
+  rayo_caminar_de_frente.png               256 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  rayo_correr_de_frente.png                256 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  rayo_caminar_de_lado.png                 256 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  rayo_correr_de_lado.png                  272 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  rayo_caminar_con_arco.png                256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  rayo_correr_con_arco.png                 304 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  rayo_caminar_con_raqueta.png             256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  rayo_correr_con_raqueta.png              256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  rayo_caminar_hacia_arriba.png            256 x 272   6       X 0.5 · Y 0.0368     1, 2, 3, 4, 5, 6     cabeza
+  rayo_caminar_hacia_abajo.png             280 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  rayo_ataque_de_frente.png                400 x 280   6       X 0.5 · Y 0.0357     1, 2, 3, 4, 5, 6     cabeza
+  rayo_ataque_de_lado.png                  400 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  rayo_arco_de_frente.png                  256 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  rayo_arco_de_lado.png                    256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     cabeza
+  rayo_raqueta_de_frente.png               336 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  rayo_raqueta_de_lado.png                 384 x 288   6       X 0.5 · Y 0.0347     1, 2, 3, 4, 5, 6     cabeza
+  rayo_raqueta_de_espaldas_idle.png        272 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  rayo_golpe_de_espaldas.png               376 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     cabeza
+  rayo_nadar_de_frente.png                 288 x 256   6       Center               1, 2, 3, 4, 5, 6     cabeza
+  rayo_nadar_de_lado.png                   304 x 256   6       Center               1, 2, 3, 4, 5, 6     cabeza
+  rayo_nadar_de_espaldas.png               304 x 264   6       Center               1, 2, 3, 4, 5, 6     cabeza
+  rayo_escalar_con_arco.png                256 x 288   6       X 0.5 · Y 0.0347     1, 2, 3, 4, 5, 6     cabeza
+
+GUARDIÁN DE RAQUETA  (carpeta personajes/guardian_raqueta)
+  Archivo                                  Celda       Frames  Pivot                Orden original       Alineación
+  guardian_idle.png                        256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     base
+  guardian_golpe_hacia_arriba.png          296 x 280   4       X 0.5 · Y 0.0357     1, 2, 3, 4           base
+  guardian_golpe_hacia_abajo.png           264 x 328   4       X 0.5 · Y 0.2500     1, 2, 3, 4           base
+  guardian_golpe_a_la_izquierda.png        488 x 264   4       X 0.5 · Y 0.0682     1, 2, 3, 4           base
+  guardian_golpe_a_la_derecha.png          344 x 256   4       X 0.5 · Y 0.0391     1, 2, 3, 4           base
+  guardian_golpe_arriba_izquierda.png      440 x 256   4       X 0.5 · Y 0.0391     1, 2, 3, 4           base
+  guardian_golpe_arriba_derecha.png        400 x 264   4       X 0.5 · Y 0.0682     1, 2, 3, 4           base
+  guardian_golpe_abajo_izquierda.png       368 x 288   4       X 0.5 · Y 0.1458     1, 2, 3, 4           base
+  guardian_golpe_abajo_derecha.png         296 x 280   4       X 0.5 · Y 0.1214     1, 2, 3, 4           base
+  guardian_ataque_magico.png               256 x 264   6       X 0.5 · Y 0.0682     1, 2, 3, 4, 5, 6     base
+  guardian_idle_de_lado.png                256 x 336   6       X 0.5 · Y 0.0536     1, 2, 3, 4, 5, 6     base
+  guardian_caminar_de_lado.png             264 x 368   6       X 0.5 · Y 0.0707     1, 2, 3, 4, 5, 6     base
+  guardian_golpe_de_lado.png               336 x 336   6       X 0.5 · Y 0.0298     1, 2, 3, 4, 5, 6     base
+
+ENEMIGOS  (carpeta personajes/enemigos)
+  Archivo                                  Celda       Frames  Pivot                Orden original       Alineación
+  golem_de_roca.png                        256 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     con salto
+  slime_del_rayo.png                       256 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     con salto
+  slime_nebuloso.png                       256 x 320   6       X 0.5 · Y 0.0312     1, 2, 3, 4, 5, 6     con salto
+  slime_de_planta.png                      256 x 288   6       X 0.5 · Y 0.0347     1, 2, 3, 4, 5, 6     con salto
+  slime_de_fuego.png                       256 x 312   6       X 0.5 · Y 0.0321     1, 2, 3, 4, 5, 6     con salto
+  slime_de_hielo.png                       256 x 264   6       X 0.5 · Y 0.0379     1, 2, 3, 4, 5, 6     con salto
+  slime_sombrio.png                        280 x 272   6       X 0.5 · Y 0.0368     1, 2, 3, 4, 5, 6     con salto
+  dragon_de_hielo.png                      280 x 256   6       X 0.5 · Y 0.0391     1, 2, 3, 4, 5, 6     con salto
+  espiritu_de_planta.png                   256 x 336   6       X 0.5 · Y 0.0298     1, 2, 3, 4, 5, 6     con salto
+  golem_de_lava.png                        264 x 272   6       X 0.5 · Y 0.0368     1, 2, 3, 4, 5, 6     con salto
+  cristal_del_rayo.png                     264 x 304   6       X 0.5 · Y 0.0329     1, 2, 3, 4, 5, 6     con salto
+  espectro_carmesi.png                     272 x 312   6       X 0.5 · Y 0.0321     1, 2, 3, 4, 5, 6     con salto
+  pocion_carmesi.png                       256 x 344   6       X 0.5 · Y 0.0291     1, 2, 3, 4, 5, 6     pies
+  diana_de_madera.png                      288 x 296   6       X 0.5 · Y 0.0338     1, 2, 3, 4, 5, 6     pies
+
+Notas:
+- Mago Elemental: 'idle' e 'idle_con_poderes' son las versiones de la primera hoja (frames 2, 4, 5, 6);
+  'idle_de_frente' e 'idle_con_poder_de_frente' son las que mandaste después. Usa las que prefieras.
+- Mago Elemental: caminar de lado es la versión 1 (frames 1-4) y correr de lado la versión 2.
+- Los demás personajes van en el orden por defecto del visor (todos los frames, 1 a 6).
+- FPS sugeridos: idle 6-8, caminar 10, correr 12-14, ataques 12, nadar 8-10, enemigos 8-10.
+
+ASSETS DEL TEMPLO: carpeta assets/ (instrucciones en assets/LEEME_assets.txt). 1 tile = 64 px, PPU 64.

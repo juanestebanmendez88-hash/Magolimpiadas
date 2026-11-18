@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee0f1298a1411a4281506eee312c242, type: 3}
+  m_Name: OnlineSessionSettings
+  m_EditorClassIdentifier: Assembly-CSharp::ArcaneGames.Network.OnlineSessionSettings
+  rosterPrefab: {fileID: 8115181819048191063, guid: bfc0c254a594a58499c6e8f2586ba08f, type: 3}
+  avatarPrefab: {fileID: 4195691083154739245, guid: 931edc0d6125afe43853234f06645559, type: 3}
+  gameSceneName: LaberintoMinotauro
+  menuSceneName: 00_Inicio
+  createRoomAttempts: 3

@@ -1,0 +1,86 @@
+NIVEL PING PONG · MESA DEL COLISEO
+==================================
+
+CONTENIDO
+- fondo/coliseo_fondo.png ............ 1659 x 948 px
+- mesa/mesa_con_red.png .............. 1065 x 843 px (mesa completa)
+- mesa/mesa_sin_red.png .............. 1065 x 843 px (la mesa sin la red)
+- mesa/mesa_red.png .................. 1065 x 843 px (solo la red; encaja
+                                       exacto sobre mesa_sin_red)
+- personajes/<mago>/ ................. 4 animaciones con paleta por mago
+- enemigos/guardian/ ................. guardián de lado: idle, caminar, golpe
+                                       y lanzar esfera
+- efectos/bolas/ ..................... 4 bolas de ping pong, 64 x 64
+- efectos/estelas/ ................... estela mágica y estela simple por mago
+- medidas.json ....................... todas las medidas en datos
+- vista_previa_nivel.png ............. ejemplo de cómo se arma el nivel
+
+AJUSTES DE IMPORTACIÓN EN UNITY (todas las imágenes)
+- Texture Type: Sprite (2D and UI)
+- Filter Mode: Point (no filter)
+- Compression: None
+- Personajes, enemigos y efectos: Pixels Per Unit = 64
+  (igual que el resto del juego).
+- Fondo: Pixels Per Unit = 30. Así el coliseo queda grande y caben los
+  4 magos de un lado de la mesa y el gigante del otro.
+- Mesa: Pixels Per Unit = 52, así cabe dentro de la cancha del fondo,
+  como en la vista previa. Si la quieres más grande o más pequeña, cambia
+  solo este número (más alto = más pequeña).
+- Guardián (gigante): en este nivel ponle Scale 1.5 en el Transform,
+  para que se vea más grande que los magos.
+
+LA RED SEPARADA
+Usa mesa_sin_red + mesa_red como dos sprites en la misma posición.
+Pon la red en una capa (Order in Layer) más alta que la bola, así la bola
+pasa por detrás de la red cuando conviene. Si no lo necesitas, usa
+mesa_con_red y listo.
+
+HOJAS DE ANIMACIÓN (Sprite Mode: Multiple · Slice: Grid By Cell Size)
+Todas tienen 6 frames en una sola fila.
+
+Personajes con paleta (celda 512 de ancho)
+  Mago            Animación    Hoja         Celda      Pivote
+  maga_nebulosa   idle         3072 x 256   512 x 256  X 0.5 · Y 0.0391
+                  golpe_lado   3072 x 256   512 x 256  X 0.5 · Y 0.0391
+                  caminar      3072 x 256   512 x 256  X 0.5 · Y 0.0391
+                  correr       3072 x 256   512 x 256  X 0.5 · Y 0.0391
+  mago_rayo       idle         3072 x 256   512 x 256  X 0.5 · Y 0.0391
+                  golpe_lado   3072 x 264   512 x 264  X 0.5 · Y 0.0379
+                  caminar      3072 x 256   512 x 256  X 0.5 · Y 0.0391
+                  correr       3072 x 256   512 x 256  X 0.5 · Y 0.0391
+  mago_elemental  (las 4)      3072 x 256   512 x 256  X 0.5 · Y 0.0391
+  druida_verde    (las 4)      3072 x 256   512 x 256  X 0.5 · Y 0.0391
+
+  En todas, la línea de los pies queda a 10 px del borde de abajo.
+  Si tu Sprite Editor pide el pivote en píxeles: X = 256, Y = 10.
+
+Guardián de lado (celda 512 de ancho)
+  idle_lado            3072 x 336   512 x 336   pivote Y = 18 px  (0.0536)
+  caminar_lado         3072 x 368   512 x 368   pivote Y = 26 px  (0.0707)
+  golpe_lado           3072 x 336   512 x 336   pivote Y = 10 px  (0.0298)
+  lanzar_esfera_lado   3072 x 328   512 x 328   pivote Y = 10 px  (0.0305)
+  En lanzar_esfera la esfera dorada sale en el frame 4 y se aleja hasta
+  el frame 6, dentro del mismo dibujo.
+
+_cabeza y _pies
+  Cada animación viene en dos versiones con los mismos frames:
+  - _pies: los pies siempre tocan el suelo (úsala en el juego).
+  - _cabeza: la cabeza queda quieta y el cuerpo se mueve
+    (útil para comparar o para efectos).
+
+Efectos
+  bola_<mago>.png ............ 64 x 64, pivote al centro (0.5, 0.5)
+  estela_magica_<mago>.png ... 768 x 80, 6 frames de 128 x 80, 12 fps
+  estela_simple_<mago>.png ... 768 x 80, 6 frames de 128 x 80, 12 fps
+  Pivote de las estelas: X = 120 px (0.9375), Y = 40 px (0.5).
+  Es la punta de la estela: pon la estela como hija de la bola, en la
+  posición de la bola, y gírala según la dirección en que vuela. La
+  estela mágica y la simple son intercambiables.
+
+FPS SUGERIDOS
+  idle 8 · caminar 10 · correr 12 · golpe 12 · estelas 12
+  (puedes ajustarlos en el Animator).
+
+COLORES POR MAGO
+  Maga Nebulosa = morado · Mago del Rayo = azul ·
+  Mago Elemental = naranja · Druida Verde = verde
