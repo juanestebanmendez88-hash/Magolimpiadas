@@ -7,5 +7,6 @@ namespace ArcaneGames.Network
         PingPong,
         SwimRace,
         ArtisticSwimming,
+        IslandArrival,
     }
 }

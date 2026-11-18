@@ -17,6 +17,7 @@ public class TempleHud : MonoBehaviour
     public TMP_Text bowText, powerText;
     public Sprite normalBackground, activeBackground;
     public Sprite[] arrows = new Sprite[4];
+    public Sprite fixedBowIcon;
 
     public CanvasGroup actionGroup;
     public TMP_Text actionText;
@@ -26,6 +27,9 @@ public class TempleHud : MonoBehaviour
     public TMP_Text mainTip;
     public TMP_Text secondaryTip;
     public GameObject tipDivider;
+    public bool centeredTip = true;
+    public Vector2 centeredTipPosition = new Vector2(0f, 170f);
+    [Range(0f, 0.5f)] public float tipOutlineWidth = 0.28f;
 
     public RectTransform coinsRows;
     public TMP_FontAsset font;
@@ -45,6 +49,10 @@ public class TempleHud : MonoBehaviour
     float tipUntil, tipAlpha;
     readonly List<(TMP_Text displayName, TMP_Text count, Image star)> rows = new List<(TMP_Text, TMP_Text, Image)>();
     readonly Dictionary<Sprite, Sprite> portraits = new Dictionary<Sprite, Sprite>();
+    static readonly Color32 TipOutlineColor = new Color32(15, 8, 35, 255);
+    const float CenteredTipMaxWidth = 1200f;
+    const float CenteredTipMargin = 80f;
+    const float CenteredTipHeight = 130f;
     CharacterSwitcher change;
 
     public bool VisibleTip => tipAlpha > 0.01f || Time.time < tipUntil;
@@ -73,7 +81,7 @@ public class TempleHud : MonoBehaviour
         }
         if (mainTip != null) mainTip.text = principal;
         if (secondaryTip != null) secondaryTip.text = secondary;
-        if (tipDivider != null) tipDivider.SetActive(!string.IsNullOrEmpty(secondary));
+        if (tipDivider != null) tipDivider.SetActive(!centeredTip && !string.IsNullOrEmpty(secondary));
         tipUntil = Time.time + seconds;
     }
 
@@ -99,6 +107,14 @@ public class TempleHud : MonoBehaviour
         float width = canvas.rect.width;
         if (width <= 1f || Mathf.Abs(width - arrangedWidth) < 0.5f) return;
         arrangedWidth = width;
+        ApplyTipStyle();
+        if (centeredTip)
+        {
+            tipPanel.anchorMin = tipPanel.anchorMax = tipPanel.pivot = new Vector2(0.5f, 0.5f);
+            tipPanel.anchoredPosition = centeredTipPosition;
+            tipPanel.sizeDelta = new Vector2(Mathf.Min(CenteredTipMaxWidth, width - CenteredTipMargin), CenteredTipHeight);
+            return;
+        }
         const float margin = 16f, max = 680f, min = 520f, heightValue = 110f;
         float leftEdge = magePanel != null ? magePanel.anchoredPosition.x + magePanel.rect.width + margin : margin;
         float right = coinsPanel != null ? width + coinsPanel.anchoredPosition.x - coinsPanel.rect.width - margin : width - margin;
@@ -121,6 +137,19 @@ public class TempleHud : MonoBehaviour
         tipPanel.sizeDelta = new Vector2(wa, heightValue);
     }
 
+    void ApplyTipStyle()
+    {
+        var background = tipPanel != null ? tipPanel.GetComponent<Image>() : null;
+        if (background != null) background.enabled = !centeredTip;
+        if (centeredTip && tipDivider != null) tipDivider.SetActive(false);
+        foreach (var text in new[] { mainTip, secondaryTip })
+        {
+            if (text == null) continue;
+            text.outlineWidth = centeredTip ? tipOutlineWidth : 0f;
+            text.outlineColor = TipOutlineColor;
+        }
+    }
+
     void Down()
     {
         if (bottomGroup == null) return;
@@ -135,7 +164,11 @@ public class TempleHud : MonoBehaviour
         int i = ColorIndex(mage.data.element);
         if (displayName != null) { displayName.text = mage.data.displayName; displayName.color = Color.Lerp(mage.data.color, Color.white, 0.25f); }
         if (portrait != null) portrait.sprite = Portrait(mage);
-        if (bowIcon != null && i < arrows.Length) bowIcon.sprite = arrows[i];
+        if (bowIcon != null)
+        {
+            if (fixedBowIcon != null) bowIcon.sprite = fixedBowIcon;
+            else if (i < arrows.Length) bowIcon.sprite = arrows[i];
+        }
         var icons = ElementsIcons.Load();
         if (powerIcon != null && icons != null) powerIcon.sprite = icons.For(mage.data.element);
         if (secondaryPanel != null) secondaryPanel.SetActive(mage.data.hasSecondaryPower);

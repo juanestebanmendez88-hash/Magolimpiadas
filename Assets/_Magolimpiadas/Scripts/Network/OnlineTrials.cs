@@ -8,7 +8,8 @@ namespace ArcaneGames.Network
             if (!OnlineMatch.IsActive || director == null)
                 return false;
 
-            director.RPC_RequestStart(trial);
+            if (OnlineMatch.TryGetMageIndex(ChosenMage.Chosen, out int mageIndex))
+                director.RPC_ReportArrival(trial, mageIndex);
             return true;
         }
 

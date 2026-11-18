@@ -166,8 +166,8 @@ namespace ArcaneGames.EditorTools
 
         public static readonly (string id, string displayName, string element, string colorHex, string modelFile, string description)[] WizardDefinitions =
         {
-            ("elemental", "Elemental", "Fuego", "#FF7A2F", "Assets/_Magolimpiadas/Magos3D/Modelos/MagoElemental.fbx",
-                "Forjado en las brasas del Estadio Flotante. Sus hechizos de fuego arrasan la pista."),
+            ("elemental", "Elemental", "Fuego y <color=#9FDFFF>hielo</color>", "#FF7A2F", "Assets/_Magolimpiadas/Magos3D/Modelos/MagoElemental.fbx",
+                "Forjado en las brasas del Estadio Flotante. Sus hechizos de fuego arrasan la pista y su hielo frena a cualquier rival."),
             ("nebulosa", "Nebulosa", "Cosmos", "#A55CFF", "Assets/_Magolimpiadas/Magos3D/Modelos/Maga_Nebulosa.fbx",
                 "Llegó desde un pliegue del cielo nocturno. Abre portales y dobla la luz de la luna."),
             ("druida", "Druida", "Naturaleza", "#58C24A", "Assets/_Magolimpiadas/Magos3D/Modelos/Druida.fbx",

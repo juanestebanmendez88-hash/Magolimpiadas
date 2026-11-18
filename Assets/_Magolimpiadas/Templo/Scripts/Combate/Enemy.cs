@@ -121,6 +121,11 @@ public class Enemy : MonoBehaviour
         Color color = attacker != null && attacker.data != null ? attacker.data.color : Color.white;
         DamageNumbers.Damage(Center + Vector2.up * 0.8f, damage, mult, color);
         OnReceiveHit?.Invoke(this, attacker, damage, mult);
+        if (power.slows && attacker != null && WorldSwitcher.Instance != null && WorldSwitcher.Instance.player2D == attacker)
+        {
+            if (mult <= 0f) Notices.Tip("hielo_inmune", "El hielo no le hace nada a los enemigos de hielo: usa el fuego (clic izquierdo)");
+            else Notices.Tip("hielo", "¡Lo frenaste! El hielo ralentiza 3 segundos, pero el fuego (clic izquierdo) hace más daño");
+        }
         if (mult <= 0f) return 0f;
         Health -= damage;
         hitUntil = Time.time + 0.1f;

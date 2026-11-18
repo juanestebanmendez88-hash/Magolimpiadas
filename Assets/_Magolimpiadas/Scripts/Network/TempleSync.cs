@@ -63,7 +63,7 @@ namespace ArcaneGames.Network
 
         public override bool TryEnterLocally()
         {
-            if (world == null || characterSwitch == null || world.InWorld2D)
+            if (world == null || characterSwitch == null || world.InWorld2D || ElementalDoor.TempleCompleted)
                 return true;
             if (world.Busy)
                 return false;

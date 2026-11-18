@@ -66,22 +66,6 @@ namespace ArcaneGames.Network
             return wizardId != null;
         }
 
-        public static string DisplayNameOf(int mageIndex)
-        {
-            MageRoster roster = IsActive ? MageRoster.For(Runner) : null;
-            if (roster == null)
-                return null;
-
-            for (int i = 0; i < roster.Slots.Length; i++)
-            {
-                RosterSlot slot = roster.Slots[i];
-                if (slot.IsTaken && slot.MageIndex == mageIndex && !string.IsNullOrEmpty(slot.PlayerName.Value))
-                    return slot.PlayerName.Value;
-            }
-
-            return roster.TryGetMage(mageIndex, out WizardData mage) ? mage.displayName : null;
-        }
-
         public static bool LoadSceneForEveryone(string sceneName)
         {
             return IsHost && SessionLauncher.Instance.LoadSceneForEveryone(sceneName);

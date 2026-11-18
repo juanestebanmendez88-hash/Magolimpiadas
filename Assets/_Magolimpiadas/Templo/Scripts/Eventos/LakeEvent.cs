@@ -22,7 +22,7 @@ public class LakeEvent : LevelEvent
         {
             if (p == null) continue;
             p.enabled = true;
-            Particles(p.bounds.center, new Color(0.75f, 0.92f, 1f), 18, 0.25f, new Vector2(1f, 3f), 0.3f, new Vector3(p.bounds.size.x, 0.5f, 0f));
+            Particles(ParticleShape.Snowflakes, p.bounds.center, 18, 0.25f, new Vector2(1f, 3f), 0.3f, new Vector3(p.bounds.size.x, 0.5f, 0f));
             for (float t = 0f; t < 1f; t += Time.deltaTime / secondsPerPiece)
             {
                 p.color = new Color(1f, 1f, 1f, t);

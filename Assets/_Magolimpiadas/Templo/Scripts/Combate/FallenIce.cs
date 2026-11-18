@@ -37,7 +37,7 @@ public class FallenIce : MonoBehaviour
             if (c.GetComponentInParent<Enemy>() != null || c.GetComponentInParent<Arrow>() != null) continue;
             var mage = c.GetComponentInParent<Mage>();
             if (mage != null) mage.ReceiveDamage(damage, (Vector2)transform.position + Vector2.up);
-            LevelEvent.Particles(hits[i].point, new Color(0.8f, 0.95f, 1f), 12, 0.2f, new Vector2(1.5f, 4f), 0.1f, new Vector3(0.4f, 0.1f, 0f));
+            LevelEvent.Particles(LevelEvent.ParticleShape.Snowflakes, hits[i].point, 12, 0.2f, new Vector2(1.5f, 4f), 0.1f, new Vector3(0.4f, 0.1f, 0f));
             Destroy(gameObject);
             return;
         }

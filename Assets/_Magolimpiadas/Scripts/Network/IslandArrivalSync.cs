@@ -3,30 +3,16 @@ using UnityEngine;
 
 namespace ArcaneGames.Network
 {
-    public class IslandArrivalSync : NetworkBehaviour
+    public class IslandArrivalSync : TrialSync
     {
         private IslandCinematic cinematic;
         private bool playedLocally;
 
         public static IslandArrivalSync Current { get; private set; }
 
-        [Networked] private NetworkBool Opened { get; set; }
-        [Networked] private int OpenerMageIndex { get; set; }
+        public static bool AlreadyPlayed => Current != null && Current.playedLocally;
 
-        public static bool TryRequest(string wizardId)
-        {
-            IslandArrivalSync sync = Current;
-            if (!OnlineMatch.IsActive || sync == null || sync.playedLocally)
-                return false;
-
-            if (!sync.Opened)
-            {
-                OnlineMatch.TryGetMageIndex(wizardId, out int mageIndex);
-                sync.RPC_RequestOpen(mageIndex);
-            }
-
-            return true;
-        }
+        public override OnlineTrial Trial => OnlineTrial.IslandArrival;
 
         public override void Spawned()
         {
@@ -40,29 +26,16 @@ namespace ArcaneGames.Network
                 Current = null;
         }
 
-        public override void Render()
+        public override bool TryEnterLocally()
         {
-            if (!Opened || playedLocally || cinematic == null)
-                return;
+            if (cinematic == null || playedLocally)
+                return true;
+            if (!cinematic.TryStartShared())
+                return false;
 
-            playedLocally = cinematic.TryStartShared(OpenerNameForLocalPlayer());
-        }
-
-        [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-        public void RPC_RequestOpen(int openerMageIndex)
-        {
-            if (Opened)
-                return;
-
-            OpenerMageIndex = openerMageIndex;
-            Opened = true;
-        }
-
-        private string OpenerNameForLocalPlayer()
-        {
-            if (OnlineMatch.TryGetWizardId(OpenerMageIndex, out string openerId) && OnlineMatch.IsLocalWizard(openerId))
-                return null;
-            return OnlineMatch.DisplayNameOf(OpenerMageIndex);
+            playedLocally = true;
+            OnlineTrials.Finished(Trial);
+            return true;
         }
     }
 }

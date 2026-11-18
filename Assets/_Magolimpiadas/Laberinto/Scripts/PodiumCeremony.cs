@@ -307,7 +307,12 @@ public class PodiumCeremony : MonoBehaviour
 
         var effects = new List<GameObject>();
         var winner = order.Count > 0 ? actors.FirstOrDefault(x => x.id == order[0]) : null;
-        if (winner != null) effects.Add(MagicEffects.Launch(MagicEffects.Effect.StarAura, winner.root.position, 0.45f, 0, -1, null, winner.root, -1f));
+        if (winner != null)
+        {
+            var aura = MagicEffects.Launch(MagicEffects.Effect.StarAura, winner.root.position, 0.45f, 0, -1, null, winner.root, -1f);
+            MagicEffects.Tint(aura, MagicEffects.MageThemeColor(winner.id));
+            effects.Add(aura);
+        }
         GameSound.Celebrate(GameAudio.Sound.Applause, 0.6f, 4f, SoundSynthesizer.Applause(3.5f), 1.2f);
         float nextRocket = 0.8f;
         int rocket = 0;

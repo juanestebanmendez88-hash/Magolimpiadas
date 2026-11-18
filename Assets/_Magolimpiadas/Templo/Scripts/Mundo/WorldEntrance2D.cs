@@ -64,7 +64,7 @@ public class WorldEntrance2D : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerMage>() == null) return;
+        if (other.GetComponent<PlayerMage>() == null || ElementalDoor.TempleCompleted) return;
         if (WorldSwitcher.Instance == null)
         {
             Debug.LogWarning("Falta el objeto 'Cambio de mundo' en la escena.", this);

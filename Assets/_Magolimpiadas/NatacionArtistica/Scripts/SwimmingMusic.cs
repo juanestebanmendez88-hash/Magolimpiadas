@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class SwimmingMusic : MonoBehaviour
 {
-    [Range(0f, 1f)] public float volume = 0.75f;
+    [Range(0f, 1f)] public float volume = 0.45f;
     public int testMeasures = 8;
 
     AudioSource font;

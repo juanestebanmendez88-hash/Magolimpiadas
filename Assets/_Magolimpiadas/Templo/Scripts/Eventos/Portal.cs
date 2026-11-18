@@ -30,7 +30,6 @@ public class Portal : MonoBehaviour
     public void Ignite()
     {
         lit = true;
-        LevelEvent.Particles(transform.position + Vector3.up * 2f, new Color(0.75f, 0.45f, 1f), 30, 0.3f, new Vector2(1f, 3f), 0.5f, new Vector3(2f, 3f, 0f));
     }
 
     void Update()
@@ -46,7 +45,6 @@ public class Portal : MonoBehaviour
         if (m == null || !m.Alive) return;
         if (cooldownByMage.TryGetValue(m, out float t) && Time.time < t) return;
         cooldownByMage[m] = Time.time + 1f;
-        LevelEvent.Particles(m.transform.position + Vector3.up, new Color(0.75f, 0.45f, 1f), 15, 0.25f, new Vector2(1f, 3f), 0.2f, Vector3.one);
         m.Place(destination.Exit);
         GameSound.Play(GameAudio.Sound.NebulaPower, 0.5f, 1.1f, null, 0.3f);
         if (WorldSwitcher.Instance != null && WorldSwitcher.Instance.player2D == m)

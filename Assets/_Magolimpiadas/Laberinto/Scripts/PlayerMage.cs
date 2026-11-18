@@ -185,6 +185,11 @@ public class PlayerMage : MonoBehaviour
         if (minotaur != null) minotaur.LoseTrack();
     }
 
+    public void StandStill()
+    {
+        animator.SetFloat("Velocidad", 0f);
+    }
+
     public void Catch(float respawnTime)
     {
         caught = true;

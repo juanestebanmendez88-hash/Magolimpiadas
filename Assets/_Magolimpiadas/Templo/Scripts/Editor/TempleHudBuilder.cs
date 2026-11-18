@@ -23,13 +23,13 @@ public static class TempleHudBuilder
     public static string Create()
     {
         Edges(Fantasy + "/slots/slot_common.png", 28);
-        Edges(Fantasy + "/slots/slot_selected.png", 28);
+        Edges(Fantasy + "/slots/slot_selected_sin_puntos.png", 28);
         var heart = CreateHeart();
         var fT = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(TitleFont);
         var fX = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(TextFont);
         var panel = Load(Fantasy + "/panels/tooltip.png");
         var key = Load(Fantasy + "/slots/slot_common.png");
-        var active = Load(Fantasy + "/slots/slot_selected.png");
+        var active = Load(Fantasy + "/slots/slot_selected_sin_puntos.png");
 
         var old = Object.FindObjectsByType<TempleHud>(FindObjectsInactive.Include, FindObjectsSortMode.None).FirstOrDefault();
         if (old != null) Undo.DestroyObjectImmediate(old.gameObject);

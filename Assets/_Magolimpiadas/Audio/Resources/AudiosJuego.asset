@@ -76,25 +76,25 @@ MonoBehaviour:
   tracks:
   - track: 0
     clip: {fileID: 8300000, guid: 830992a0f818c044f9a2650c69ab02bd, type: 3}
-    volume: 0.7
+    volume: 0.12
   - track: 1
     clip: {fileID: 8300000, guid: 2cd7d806bef17d741a589d7fd778d8db, type: 3}
-    volume: 0.55
+    volume: 0.33
   - track: 2
     clip: {fileID: 8300000, guid: dd9bb4eafd45533439b77d501b4ed58b, type: 3}
-    volume: 0.55
+    volume: 0.74
   - track: 3
     clip: {fileID: 8300000, guid: dd4d7a73aa03d564daebcdf18fa18a03, type: 3}
-    volume: 0.5
+    volume: 0.78
   - track: 4
     clip: {fileID: 8300000, guid: 67578b0102d3b5d46b155f619d9a8e75, type: 3}
-    volume: 0.55
+    volume: 0.89
   - track: 5
     clip: {fileID: 8300000, guid: 6f76c88198a103c44a8f6fe52b5a6f67, type: 3}
-    volume: 0.55
+    volume: 0.15
   - track: 6
     clip: {fileID: 8300000, guid: fcc1161f1916f3846a57ba557ea5be9d, type: 3}
-    volume: 0.8
+    volume: 0.45
   - track: 7
     clip: {fileID: 8300000, guid: 755198a466a89674ba540d439eec5cda, type: 3}
-    volume: 0.65
+    volume: 0.24

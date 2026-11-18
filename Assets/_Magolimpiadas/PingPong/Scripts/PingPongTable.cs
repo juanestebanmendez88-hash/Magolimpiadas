@@ -25,7 +25,7 @@ public class PingPongTable : MonoBehaviour
 
     void Update()
     {
-        if (zone == null || player == null || level == null) return;
+        if (zone == null || player == null || level == null || PingPongLevel.Won) return;
         var world = WorldSwitcher.Instance;
         if (world == null || world.Busy || !player.enabled) { waitUntilAway = true; return; }
 

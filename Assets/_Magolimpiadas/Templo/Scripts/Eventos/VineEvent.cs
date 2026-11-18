@@ -22,7 +22,7 @@ public class VineEvent : LevelEvent
             if (tr == null) continue;
             var scale = tr.transform.localScale;
             tr.enabled = true;
-            Particles(tr.bounds.center, new Color(0.45f, 0.9f, 0.3f), 25, 0.3f, new Vector2(1f, 2.5f), secondsPerSection, new Vector3(1.5f, tr.bounds.size.y, 0f));
+            Particles(ParticleShape.Leaves, tr.bounds.center, 25, 0.3f, new Vector2(1f, 2.5f), secondsPerSection, new Vector3(1.5f, tr.bounds.size.y, 0f));
             for (float t = 0f; t < 1f; t += Time.deltaTime / secondsPerSection)
             {
                 tr.transform.localScale = new Vector3(scale.x, scale.y * Mathf.SmoothStep(0f, 1f, t), scale.z);

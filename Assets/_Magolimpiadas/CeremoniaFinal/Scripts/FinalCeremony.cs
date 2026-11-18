@@ -176,6 +176,7 @@ public class FinalCeremony : MonoBehaviour
         if (place == 0)
         {
             m.aura = MagicEffects.Launch(MagicEffects.Effect.StarAura, m.animator.transform.position, 0.45f, 0, -1, null, m.animator.transform, -1f);
+            MagicEffects.Tint(m.aura, MagicEffects.MageThemeColor(m.id));
             if (m.aura != null) effects.Add(m.aura);
             GameSound.Celebrate(GameAudio.Sound.Medal, 0.7f, 4f, SoundSynthesizer.Medal(), 0.6f);
         }

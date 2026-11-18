@@ -35,7 +35,7 @@ public class ElementalCircle : MonoBehaviour
         Lit = true;
         AnyLit?.Invoke(this);
         if (glow != null) glow.enabled = true;
-        LevelEvent.Particles(transform.position, shooter.data.color, 20, 0.25f, new Vector2(1f, 3f), 0.3f, Vector3.one * 0.5f);
+        LevelEvent.Sparkles(transform.position, shooter.data.color, 20, 0.25f, new Vector2(1f, 3f), 0.3f, Vector3.one * 0.5f);
         if (door != null) door.LitCircle();
         return true;
     }

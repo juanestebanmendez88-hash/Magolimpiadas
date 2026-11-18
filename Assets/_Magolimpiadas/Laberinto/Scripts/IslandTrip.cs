@@ -9,7 +9,7 @@ public class IslandTrip : MonoBehaviour
     {
         var playerMage = other.GetComponent<PlayerMage>();
         if (playerMage == null || !playerMage.enabled || cinematic == null) return;
-        if (IslandArrivalSync.TryRequest(ChosenMage.Chosen)) return;
+        if (!IslandArrivalSync.AlreadyPlayed && OnlineTrials.TryRequest(OnlineTrial.IslandArrival)) return;
         cinematic.Begin(playerMage, transform.position);
     }
 }

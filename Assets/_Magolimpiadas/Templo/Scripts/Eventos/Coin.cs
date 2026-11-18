@@ -55,7 +55,6 @@ public class Coin : MonoBehaviour
         OnChange?.Invoke();
         DamageNumbers.Message(transform.position + Vector3.up * 1.2f, "+" + amountValue, m.data.color);
         GameSound.Play(SoundSynthesizer.Star(), 0.35f, 1.1f);
-        LevelEvent.Particles(transform.position + Vector3.up * 0.5f, new Color(1f, 0.85f, 0.3f), 10, 0.2f, new Vector2(1f, 3f), 0.1f, Vector3.one * 0.3f);
         GetComponent<Collider2D>().enabled = false;
         start = transform.position;
     }

@@ -146,6 +146,73 @@ public class MagicEffects : ScriptableObject
         return go;
     }
 
+    public static Color MageThemeColor(string mageId)
+    {
+        switch (mageId)
+        {
+            case "elemental": return Weaknesses.ColorElemental;
+            case "nebulosa": return Weaknesses.NebulaColor;
+            case "druida": return Weaknesses.DruidColor;
+            case "rayo": return Weaknesses.LightningColor;
+        }
+        return Color.white;
+    }
+
+    public static void Tint(GameObject effect, Color color)
+    {
+        if (effect == null) return;
+        foreach (var ps in effect.GetComponentsInChildren<ParticleSystem>(true))
+        {
+            var main = ps.main;
+            var startColor = main.startColor;
+            switch (startColor.mode)
+            {
+                case ParticleSystemGradientMode.Color:
+                    startColor.color = TintColor(startColor.color, color);
+                    break;
+                case ParticleSystemGradientMode.TwoColors:
+                    startColor.colorMin = TintColor(startColor.colorMin, color);
+                    startColor.colorMax = TintColor(startColor.colorMax, color);
+                    break;
+                case ParticleSystemGradientMode.Gradient:
+                case ParticleSystemGradientMode.RandomColor:
+                    startColor.gradient = TintGradient(startColor.gradient, color);
+                    break;
+                case ParticleSystemGradientMode.TwoGradients:
+                    startColor.gradientMin = TintGradient(startColor.gradientMin, color);
+                    startColor.gradientMax = TintGradient(startColor.gradientMax, color);
+                    break;
+            }
+            main.startColor = startColor;
+            var overLifetime = ps.colorOverLifetime;
+            if (!overLifetime.enabled) continue;
+            var lifetimeColor = overLifetime.color;
+            if (lifetimeColor.mode == ParticleSystemGradientMode.Gradient) lifetimeColor.gradient = TintGradient(lifetimeColor.gradient, color);
+            else if (lifetimeColor.mode == ParticleSystemGradientMode.Color) lifetimeColor.color = TintColor(lifetimeColor.color, color);
+            overLifetime.color = lifetimeColor;
+        }
+    }
+
+    static Color TintColor(Color original, Color mage)
+    {
+        const float minOriginalBrightness = 0.55f, minMageBrightness = 0.8f;
+        Color.RGBToHSV(mage, out float hue, out float saturation, out float brightness);
+        Color.RGBToHSV(original, out _, out _, out float originalBrightness);
+        var tinted = Color.HSVToRGB(hue, saturation, Mathf.Max(originalBrightness, minOriginalBrightness) * Mathf.Max(brightness, minMageBrightness), true);
+        tinted.a = original.a;
+        return tinted;
+    }
+
+    static Gradient TintGradient(Gradient gradient, Color mage)
+    {
+        if (gradient == null) return null;
+        var keys = gradient.colorKeys;
+        for (int i = 0; i < keys.Length; i++) keys[i].color = TintColor(keys[i].color, mage);
+        var tinted = new Gradient { mode = gradient.mode };
+        tinted.SetKeys(keys, gradient.alphaKeys);
+        return tinted;
+    }
+
     public static void TurnOff(GameObject effect, float destroyAfter = 2f)
     {
         if (effect == null) return;

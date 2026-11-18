@@ -21,7 +21,7 @@ public class BrambleEvent : LevelEvent
     IEnumerator Burn()
     {
         foreach (var z in brambles)
-            if (z != null) Particles(z.bounds.center, new Color(1f, 0.55f, 0.15f), 40, 0.3f, new Vector2(1f, 4f), 2f, z.bounds.size);
+            if (z != null) Particles(ParticleShape.Fire, z.bounds.center, 40, 0.3f, new Vector2(1f, 4f), 2f, z.bounds.size);
         yield return Play(turnsOn);
         if (block != null) block.enabled = false;
         yield return new WaitForSeconds(0.5f);
@@ -30,7 +30,6 @@ public class BrambleEvent : LevelEvent
         {
             if (e == null) continue;
             e.gameObject.SetActive(true);
-            Particles(e.transform.position + Vector3.up, new Color(1f, 0.3f, 0.3f), 20, 0.3f, new Vector2(1f, 3f), 0.3f, Vector3.one);
             e.Wake();
         }
         if (appear.Length > 0) Notices.Tip("zarza_enemigos", "¡Cuidado! Salieron enemigos de entre las cenizas");

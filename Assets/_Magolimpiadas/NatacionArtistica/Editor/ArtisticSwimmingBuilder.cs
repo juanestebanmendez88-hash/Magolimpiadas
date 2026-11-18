@@ -127,7 +127,7 @@ public static class ArtisticSwimmingBuilder
         var audioSource = root.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
         level.music = root.AddComponent<SwimmingMusic>();
-        level.music.volume = 0.85f;
+        level.music.volume = 0.45f;
 
         var mural = Child("Mural_P5", root.transform, Vector3.zero);
         level.content = mural.gameObject;

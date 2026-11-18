@@ -7,6 +7,7 @@ public static class NewMatch
         Coin.RestartMatch();
         Enemy.RestartMatch();
         PingPongLevel.RestartMatch();
+        ElementalDoor.RestartMatch();
         ArtisticSwimmingLevel.RestartMatch();
     }
 }

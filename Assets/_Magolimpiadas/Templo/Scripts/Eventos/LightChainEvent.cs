@@ -54,7 +54,7 @@ public class LightChainEvent : LevelEvent
             }
             lightning.SetPosition(section + 1, b);
             State(section == 0 ? mirror : receptor, section == 0 ? mirrorStates : receptorStates, 1);
-            Particles(b, lightningColor, 15, 0.2f, new Vector2(1f, 3f), 0.2f, Vector3.one * 0.5f);
+            Particles(ParticleShape.Lightning, b, 15, 0.2f, new Vector2(1f, 3f), 0.2f, Vector3.one * 0.5f);
         }
         if (elevator != null) elevator.Ignite();
         Notices.Tip("elevador", "¡El elevador se encendió! Súbete a la isla flotante");

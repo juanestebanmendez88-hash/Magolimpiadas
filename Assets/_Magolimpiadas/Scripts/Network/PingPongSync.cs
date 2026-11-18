@@ -49,7 +49,7 @@ namespace ArcaneGames.Network
 
         public override bool TryEnterLocally()
         {
-            if (level == null)
+            if (level == null || PingPongLevel.Won)
                 return true;
 
             if (!level.Playing)

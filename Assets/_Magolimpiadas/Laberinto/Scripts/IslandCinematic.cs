@@ -40,10 +40,6 @@ public class IslandCinematic : MonoBehaviour
     public float returnDuration = 1.5f;
     public bool onlyFirstTime = true;
 
-    [TextArea(2, 4)]
-    public string openedByOtherMessage = "¡{0} encontró la salida del laberinto! Todos viajan a la isla.";
-    public float openedByOtherSeconds = 3f;
-
     public static bool AnyInProgress { get; private set; }
 
     public bool InProgress { get; private set; }
@@ -97,16 +93,16 @@ public class IslandCinematic : MonoBehaviour
     {
         if (InProgress) return;
         PrepareLocalActor(player);
-        StartCoroutine(Sequence(origin, false, null));
+        StartCoroutine(Sequence(origin, false));
     }
 
-    public bool TryStartShared(string openerName)
+    public bool TryStartShared()
     {
         var player = FindFirstObjectByType<PlayerMage>();
         var world = WorldSwitcher.Instance;
         if (InProgress || player == null || !player.Available || LabyrinthIntro.InProgress || (world != null && world.Busy)) return false;
         PrepareLocalActor(player);
-        StartCoroutine(Sequence(null, true, openerName));
+        StartCoroutine(Sequence(null, true));
         return true;
     }
 
@@ -117,7 +113,7 @@ public class IslandCinematic : MonoBehaviour
         playerMageActor = new Actor { t = playerMage.transform, control = playerMage.GetComponent<CharacterController>(), animator = playerMage.animator, portal = arrivalPortal };
     }
 
-    IEnumerator Sequence(Vector3? origin, bool shared, string openerName)
+    IEnumerator Sequence(Vector3? origin, bool shared)
     {
         InProgress = true;
         AnyInProgress = true;
@@ -128,12 +124,7 @@ public class IslandCinematic : MonoBehaviour
         animator.SetBool("EnSuelo", true);
         if (playerMage.minotaur != null) playerMage.minotaur.LoseTrack();
         if (origin.HasValue) yield return WalkIntoPortal(origin.Value);
-        else
-        {
-            animator.SetFloat("Velocidad", 0f);
-            if (!string.IsNullOrEmpty(openerName) && OwlNotice.Free)
-                yield return OwlNotice.Show(this, string.Format(openedByOtherMessage, openerName), openedByOtherSeconds);
-        }
+        else animator.SetFloat("Velocidad", 0f);
         if (fadePanel != null) yield return fadePanel.ShowAndWait();
         yield return new WaitForSeconds(0.3f);
 

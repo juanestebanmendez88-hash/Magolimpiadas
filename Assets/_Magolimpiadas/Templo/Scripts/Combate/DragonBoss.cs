@@ -19,6 +19,9 @@ public class DragonBoss : MonoBehaviour
 
     public Rect platform = new Rect(1066f, 979f, 3f, 1f);
 
+    public GameObject sceneBar;
+    public RectTransform sceneFill;
+
     public static DragonBoss Current { get; private set; }
     public Enemy Enemy { get; private set; }
 
@@ -30,6 +33,7 @@ public class DragonBoss : MonoBehaviour
     public bool Down => !up && Mathf.Abs(yCurrent - flightHeight) < 0.4f;
     Image fill;
     GameObject bar;
+    float shownHealth = 1f;
 
     void Awake()
     {
@@ -47,7 +51,7 @@ public class DragonBoss : MonoBehaviour
         up = true;
         phaseChange = Time.time + upTime;
         yCurrent = transform.position.y;
-        LevelEvent.Particles(transform.position + Vector3.up, new Color(0.7f, 0.9f, 1f), 40, 0.35f, new Vector2(1f, 4f), 0.5f, new Vector3(3f, 2f, 0f));
+        LevelEvent.Particles(LevelEvent.ParticleShape.Snowflakes, transform.position + Vector3.up, 40, 0.15f, new Vector2(1f, 4f), 0.5f, new Vector3(3f, 2f, 0f));
     }
 
     void OnDisable()
@@ -88,7 +92,9 @@ public class DragonBoss : MonoBehaviour
 
     void Update()
     {
-        if (fill != null) fill.fillAmount = Mathf.Clamp01(Enemy.Health / Enemy.maxHealth);
+        float health = Mathf.Clamp01(Enemy.Health / Enemy.maxHealth);
+        if (fill != null) fill.fillAmount = health;
+        BossHealthBar.ApplyFill(sceneFill, ref shownHealth, health);
         if (!Active) return;
         if (Time.time >= nextIce)
         {
@@ -100,6 +106,13 @@ public class DragonBoss : MonoBehaviour
 
     void CreateBar()
     {
+        if (sceneBar != null)
+        {
+            bar = sceneBar;
+            shownHealth = Enemy != null && Enemy.maxHealth > 0f ? Mathf.Clamp01(Enemy.Health / Enemy.maxHealth) : 1f;
+            bar.SetActive(true);
+            return;
+        }
         if (bar != null) { bar.SetActive(true); return; }
         bar = new GameObject("Barra del jefe");
         var canvas = bar.AddComponent<Canvas>();

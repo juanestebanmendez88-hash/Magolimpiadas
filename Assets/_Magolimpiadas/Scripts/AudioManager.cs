@@ -12,6 +12,7 @@ namespace ArcaneGames
         [SerializeField] private AudioSource musicSource;
         [SerializeField] private AudioSource sfxSource;
         [SerializeField] private AudioClip buttonClickClip;
+        [Range(0f, 1f)] [SerializeField] private float songVolume = 0.12f;
 
         public float MusicVolume { get; private set; } = 0.8f;
         public float SfxVolume { get; private set; } = 1f;
@@ -74,7 +75,7 @@ namespace ArcaneGames
 
         private void ApplyVolumes()
         {
-            if (musicSource != null) musicSource.volume = MusicVolume;
+            if (musicSource != null) musicSource.volume = MusicVolume * songVolume;
             if (sfxSource != null) sfxSource.volume = SfxVolume;
         }
     }

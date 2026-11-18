@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ElementalDoor : LevelEvent
@@ -16,6 +17,14 @@ public class ElementalDoor : LevelEvent
     public Rune[] runes;
     public float waitOnFinish = 3f;
 
+    public GameObject loweringSmoke;
+    public float smokeScale = 0.35f;
+    public int smokeClouds = 3;
+
+    const float SmokeFadeSeconds = 2.5f;
+    const float SmokeEdgeInset = 0.5f;
+    const float SmokeHeight = 0.6f;
+
     [System.Serializable]
     public class Rune
     {
@@ -29,6 +38,10 @@ public class ElementalDoor : LevelEvent
     public bool IsOpen { get; private set; }
     public bool Completed { get; private set; }
     public static event System.Action<ElementalDoor> AnyCompleted;
+    public static bool TempleCompleted { get; private set; }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    public static void RestartMatch() => TempleCompleted = false;
 
     public void CompleteFromNetwork()
     {
@@ -90,13 +103,40 @@ public class ElementalDoor : LevelEvent
         if (door != null)
         {
             var a = door.GetComponent<AnimatedSprite>(); if (a != null) a.enabled = false;
-            Particles(door.bounds.center - Vector3.up * 3f, new Color(0.8f, 0.65f, 0.4f), 40, 0.35f, new Vector2(1f, 3f), 0.8f, new Vector3(4f, 0.5f, 0f));
+            var smoke = SpawnSmoke(door);
             foreach (var s in lowering) { door.sprite = s; yield return new WaitForSeconds(1f / loweringFps); }
+            foreach (var cloud in smoke)
+            {
+                if (cloud == null) continue;
+                foreach (var ps in cloud.GetComponentsInChildren<ParticleSystem>()) ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                Destroy(cloud, SmokeFadeSeconds);
+            }
         }
         if (block != null) block.enabled = false;
         IsOpen = true;
         var j = WorldSwitcher.Instance != null ? WorldSwitcher.Instance.player2D : null;
         Notices.Tip("runas", j != null ? "Párate sobre la runa " + ColorName(j.data.element) + " de la placa: es la tuya" : "Cada mago se para sobre la runa de su elemento");
+    }
+
+    List<GameObject> SpawnSmoke(SpriteRenderer target)
+    {
+        var clouds = new List<GameObject>();
+        if (loweringSmoke == null) return clouds;
+        var bounds = target.bounds;
+        int count = Mathf.Max(1, smokeClouds);
+        for (int i = 0; i < count; i++)
+        {
+            float x = count == 1 ? bounds.center.x : Mathf.Lerp(bounds.min.x + SmokeEdgeInset, bounds.max.x - SmokeEdgeInset, i / (float)(count - 1));
+            var cloud = Instantiate(loweringSmoke, new Vector3(x, bounds.min.y + SmokeHeight, 0f), Quaternion.identity);
+            cloud.transform.localScale = Vector3.one * smokeScale;
+            foreach (var r in cloud.GetComponentsInChildren<ParticleSystemRenderer>())
+            {
+                r.sortingLayerID = target.sortingLayerID;
+                r.sortingOrder = target.sortingOrder + 1;
+            }
+            clouds.Add(cloud);
+        }
+        return clouds;
     }
 
     static string ColorName(MagicElement e)
@@ -126,7 +166,7 @@ public class ElementalDoor : LevelEvent
             {
                 r.litUp = true;
                 if (r.glow != null) r.glow.enabled = true;
-                Particles(new Vector3(r.point.x, r.point.y + 1f, 0f), m.data.color, 20, 0.25f, new Vector2(1f, 3f), 0.3f, new Vector3(1f, 0.3f, 0f));
+                Sparkles(new Vector3(r.point.x, r.point.y + 1f, 0f), m.data.color, 20, 0.25f, new Vector2(1f, 3f), 0.3f, new Vector3(1f, 0.3f, 0f));
             }
         }
         foreach (var r in runes) if (!r.litUp) return;
@@ -136,10 +176,14 @@ public class ElementalDoor : LevelEvent
     IEnumerator Finish()
     {
         Completed = true;
+        TempleCompleted = true;
         AnyCompleted?.Invoke(this);
         if (plate != null && plateStates != null && plateStates.Length > 0) plate.sprite = plateStates[0];
         foreach (var r in runes) if (r.glow != null) r.glow.enabled = false;
-        Particles(plate != null ? plate.bounds.center : transform.position, new Color(1f, 0.9f, 0.5f), 80, 0.35f, new Vector2(2f, 6f), 1f, new Vector3(10f, 1f, 0f));
+        Vector3 plateCenter = plate != null ? plate.bounds.center : transform.position;
+        Particles(ParticleShape.Stars, plateCenter, 60, 0.3f, new Vector2(2f, 6f), 1f, new Vector3(10f, 1f, 0f));
+        foreach (var m in Mage.All)
+            if (m != null && m.data != null) Sparkles(plateCenter, m.data.color, 30, 0.3f, new Vector2(2f, 6f), 1f, new Vector3(10f, 1f, 0f));
         if (PodiumCeremony.Instance != null)
         {
             Notices.Tip("nivel_completado", "¡Nivel completado!");

@@ -9,14 +9,14 @@ public static class AudioBuilder
 
     static readonly (GameAudio.Track track, string file, float volume)[] Tracks =
     {
-        (GameAudio.Track.Menu, "Musica/Mus_Menu.mp3", 0.7f),
-        (GameAudio.Track.Island, "Musica/Mus_Isla.mp3", 0.55f),
-        (GameAudio.Track.Labyrinth, "Musica/Mus_Laberinto.mp3", 0.55f),
-        (GameAudio.Track.Temple, "Musica/Mus_Templo.mp3", 0.5f),
-        (GameAudio.Track.PingPong, "Musica/Mus_PingPong.mp3", 0.55f),
-        (GameAudio.Track.Swimming, "Musica/Mus_Natacion.mp3", 0.55f),
-        (GameAudio.Track.ArtisticSwimming, "Musica/Mus_NatacionArtistica_151BPM.mp3", 0.8f),
-        (GameAudio.Track.Ceremony, "Musica/Mus_Ceremonia.mp3", 0.65f),
+        (GameAudio.Track.Menu, "Musica/Mus_Menu.mp3", 0.12f),
+        (GameAudio.Track.Island, "Musica/Mus_Isla.mp3", 0.33f),
+        (GameAudio.Track.Labyrinth, "Musica/Mus_Laberinto.mp3", 0.74f),
+        (GameAudio.Track.Temple, "Musica/Mus_Templo.mp3", 0.78f),
+        (GameAudio.Track.PingPong, "Musica/Mus_PingPong.mp3", 0.89f),
+        (GameAudio.Track.Swimming, "Musica/Mus_Natacion.mp3", 0.15f),
+        (GameAudio.Track.ArtisticSwimming, "Musica/Mus_NatacionArtistica_151BPM.mp3", 0.45f),
+        (GameAudio.Track.Ceremony, "Musica/Mus_Ceremonia.mp3", 0.24f),
     };
 
     static readonly (GameAudio.Sound sound, string file, float volume)[] Sounds =

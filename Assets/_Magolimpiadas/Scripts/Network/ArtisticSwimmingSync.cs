@@ -32,7 +32,7 @@ namespace ArcaneGames.Network
 
         public override bool TryEnterLocally()
         {
-            if (level == null)
+            if (level == null || ArtisticSwimmingLevel.Won)
                 return true;
 
             if (!level.Playing)

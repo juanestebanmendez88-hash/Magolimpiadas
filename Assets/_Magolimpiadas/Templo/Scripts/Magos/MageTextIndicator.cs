@@ -9,7 +9,7 @@ public class MageTextIndicator : MonoBehaviour
     public Text healthText;
 
     public string controls = "Q cambiar modo · E usar poder · Tab cambiar de mago";
-    public string secondaryControls = "Clic derecho: hielo";
+    public string secondaryControls = "Clic derecho: hielo (frena 3 s, menos daño)";
 
     Mage listening;
 

@@ -49,6 +49,14 @@ public class TempleTutorial : MonoBehaviour
 
     public List<Page> pages = new List<Page>();
 
+    [TextArea(2, 4)]
+    public string[] secondaryPowerTexts =
+    {
+        "Además, {mago} maneja el hielo: con el clic derecho lo lanzas y frena a los enemigos durante 3 segundos.",
+        "Pero el hielo hace menos daño que el fuego, y a los enemigos de hielo no les hace nada. Para pelear, usa el fuego; el hielo sirve para frenarlos y para congelar el lago (E)."
+    };
+    public int secondaryPowerPage = 2;
+
     bool seen;
     float timeScale = 1f;
     MageData mage;
@@ -95,6 +103,9 @@ public class TempleTutorial : MonoBehaviour
             yield return ChangePage(i);
             foreach (var l in pages[i].lines)
                 yield return guide.Say(CreateText(l.text), Point(l.highlight), !owlBelow);
+            if (i == secondaryPowerPage - 1 && mage != null && mage.hasSecondaryPower && secondaryPowerTexts != null)
+                foreach (var text in secondaryPowerTexts)
+                    if (!string.IsNullOrEmpty(text)) yield return guide.Say(CreateText(text), null, !owlBelow);
         }
 
         yield return guide.Close();
