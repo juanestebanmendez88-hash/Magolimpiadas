@@ -44,15 +44,4 @@ Magolimpiadas.exe -screen-fullscreen 0 -screen-width 1280 -screen-height 720
 | Carrera de natación | Espacio lo más rápido posible |
 | Natación artística | Espacio, J, clic o botón A del mando para tocar las notas de tu carril |
 
-## Documentación
 
-- `Docs/ARCHITECTURE.md`: flujo de conexión, autoridad, estado replicado y RPC del modo en línea.
-- `LEEME_PROYECTO.md`: guía del proyecto (escenas, carpetas, scripts y menús del editor).
-
-## Uso de IA
-
-<!-- Sección para que el equipo explique con sus palabras qué herramientas de IA usó, para qué y cómo verificó el resultado. -->
-
-## Equipo
-
-<!-- Nombres de los integrantes. -->
