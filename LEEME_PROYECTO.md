@@ -75,13 +75,13 @@ Explicación completa, con el flujo de conexión, quién tiene autoridad y qué 
 1. **Conexión y sala de espera** (`SessionLauncher`, `MageRoster`): crear sala con código, unirse, nombres, elección de mago sin repetir, Listo, Empezar, salir y volver al menú con un aviso si el anfitrión cierra la sala. Errores con mensaje: sala inexistente, sala llena, partida ya empezada, sin conexión.
 2. **Los 4 magos en el mundo 3D** (`MageAvatarState`, `MagePose`, `MageBody`, `LocalMageInputProvider`, `MatchAvatarSpawner`): cada jugador maneja su mago como siempre y envía su pose en cada tick; los demás lo ven moverse y animarse (caminar, correr, saltar, antorcha, desaparecer al ser atrapado).
 3. **El minotauro** (`MinotaurSync`, `RemotePlayerPrey`): uno solo, controlado por el anfitrión; persigue a cualquiera de los 4 y, si atrapa a un jugador remoto, se lo avisa por RPC.
-4. **Las cuatro pruebas, todos juntos** (objeto de red **Pruebas en línea** en la escena del juego: `TrialDirector` y una sincronización por prueba). Cuando cualquier jugador llega a la entrada de una prueba, entran los cuatro a la vez. En línea no se puede salir con Esc ni cambiar de mago con Tab.
+4. **Las cuatro pruebas, todos juntos** (objeto de red **Pruebas en línea** en la escena del juego: `TrialDirector` y una sincronización por prueba). Cada jugador que llega a la entrada de una prueba espera con la **pantalla del búho volando** (`WaitingScreen`) hasta que lleguen todos los jugadores; el búho avisa a los que faltan dónde los esperan. Las pruebas terminadas (ping pong ganado, templo completado) no se vuelven a jugar. En línea no se puede salir con Esc ni cambiar de mago con Tab.
    - **Templo 2D** (`TempleSync`, `RemoteMageControl`): cada jugador maneja su propio mago; los demás ven sus movimientos, saltos, ataques y flechas. Los enemigos eliminados, monedas, eventos, zonas de poder, encuentros, círculos y la puerta final se comparten.
    - **Ping pong** (`PingPongSync`): el anfitrión mueve las bolas, el Guardián y el marcador; cada jugador mueve su paleta y golpea las bolas de su color desde su computador.
    - **Carrera de natación** (`SwimRaceSync`): cada jugador nada pulsando Espacio; el anfitrión suma las brazadas de todos y decide el orden de llegada.
    - **Natación artística** (`ArtisticSwimmingSync`): cada jugador toca su carril; los aciertos de los demás llegan por la red, el anfitrión marca el inicio de cada figura y la nota del jurado, y al final lleva a todos a la ceremonia final.
 5. En línea, el tutorial del templo no pausa el tiempo (la pausa del anfitrión congelaría el mundo de todos).
-6. **Portal del laberinto y cinemática de la isla** (`IslandArrivalSync`, objeto de red **Mundo en línea**): el primero que llega al portal de salida abre la isla para todos; el búho avisa a los demás quién encontró la salida y los cuatro magos salen de sus portales y encienden el pebetero juntos.
+6. **Portal del laberinto y cinemática de la isla** (`IslandArrivalSync`, objeto de red **Mundo en línea**): quien sale del laberinto espera con la pantalla del búho a que salgan todos; luego los cuatro magos salen de sus portales y encienden el pebetero juntos.
 7. **Arcos y raquetas** (`PickupSync`): cada uno recoge los suyos (el anfitrión los de los bots) y los demás ven cómo el arco vuela a la espalda de ese mago y la raqueta a su mano.
 
 **Qué NO está sincronizado todavía** (cada jugador lo ve en su propio computador): las ceremonias del podio y la ceremonia final (cada uno ve la suya, con los mismos resultados). Ver sección 11.
@@ -273,6 +273,8 @@ Se borraron los dos cubos de prueba que había junto a la entrada del laberinto 
 - Después del nivel 1 los magos ya no llevan el arco.
 - Ya no se enciende ninguna antorcha al final.
 - El minotauro ya no se queda quieto después de saltar la intro, ni trabado persiguiendo a alguien al que no puede llegar.
+
+**Traspaso visual del compañero (18 de noviembre):** partículas pixel art en el templo (`LevelEvent.Particles(ParticleShape...)`, `LevelEvent.Sparkles`, imágenes en `Templo/Resources/Particulas`); humo al hundirse la puerta elemental; barras de vida del Dragón y del Cristal abajo en el centro (`BossHealthBar`, dentro de "HUD Templo"); consejos del templo en medio de la pantalla y casilla activa sin puntitos; ícono fijo del arco; fuente secundaria Kingthings Petrock (`F_Texto`); ayuda de controles al terminar la intro (`ControlsHelp`, objeto "Ayuda de controles"); estrellas del ganador del color de su mago (`MagicEffects.Tint`); volúmenes de la música igualados; texturas, nubes e islotes en la isla de la ceremonia final; y la explicación del hielo del Mago Elemental. No se trajeron las herramientas de editor "Crear barra en la escena" ni "Medir volumen de la música" (las barras ya vienen hechas en el HUD).
 
 **Interfaz:** los HUD y las pantallas de medallas y ceremonias ya no se enciman en ninguna proporción de pantalla.
 

@@ -48,13 +48,15 @@ En línea, el tutorial del templo no pausa el tiempo (`Time.timeScale`), porque 
 
 ## El portal del laberinto y la cinemática de la isla (`IslandArrivalSync`)
 
-Vive en un objeto de red propio de la escena del juego, **Mundo en línea** (`NetworkObject` + `IslandArrivalSync` + `PickupSync`), que agrega el menú *Juegos Arcanos > 5*.
+La salida del laberinto funciona como una prueba más (`OnlineTrial.IslandArrival`) y pasa por el mismo punto de reunión que las demás (ver *Las pruebas*).
 
-1. Cuando un jugador entra al portal de salida del laberinto (`IslandTrip`), en línea no empieza su cinemática local: llama a `IslandArrivalSync.TryRequest`, que envía `RPC_RequestOpen` al host con el índice de su mago.
-2. El host acepta solo la primera petición: guarda `OpenerMageIndex` y pone `Opened = true` (los dos `[Networked]`).
-3. En `Render`, cada peer ve `Opened` y llama a `IslandCinematic.TryStartShared`. Si su jugador está ocupado (intro del búho, atrapado por el minotauro o dentro de otro mundo) lo vuelve a intentar en el siguiente frame.
-4. La cinemática compartida no hace caminar al jugador hasta el portal: los demás ven un aviso del búho con el nombre de quien encontró la salida, hay un fundido y los cuatro magos salen cada uno de **su** portal de la isla y encienden el pebetero. Como cada mago usa su propio portal en todos los computadores, terminan en el mismo lugar alrededor del caldero.
-5. Mientras dura (`IslandCinematic.AnyInProgress`), `MageAvatarState` no aplica la pose de red a los títeres (`MageBody.WorldIsFree`) para no pelear con la cinemática. Al terminar, los cuerpos de otros jugadores (y los bots en los clientes) vuelven a ser títeres; en el host los bots empiezan a seguir a su jugador.
+1. Cuando un jugador entra al portal de salida (`IslandTrip`), en línea no empieza su cinemática local: llama a `OnlineTrials.TryRequest(OnlineTrial.IslandArrival)` y queda esperando con la pantalla del búho hasta que salgan todos.
+2. Cuando llegan todos, `TrialDirector` empieza la sesión y en cada peer `IslandArrivalSync.TryEnterLocally` llama a `IslandCinematic.TryStartShared`. Si su jugador está ocupado (intro del búho, atrapado por el minotauro o dentro de otro mundo) lo vuelve a intentar en el siguiente frame.
+3. La cinemática compartida no hace caminar al jugador hasta el portal: hay un fundido y los cuatro magos salen cada uno de **su** portal de la isla y encienden el pebetero. Como cada mago usa su propio portal en todos los computadores, terminan en el mismo lugar alrededor del caldero.
+4. Mientras dura (`IslandCinematic.AnyInProgress`), `MageAvatarState` no aplica la pose de red a los títeres (`MageBody.WorldIsFree`) para no pelear con la cinemática. Al terminar, los cuerpos de otros jugadores (y los bots en los clientes) vuelven a ser títeres; en el host los bots empiezan a seguir a su jugador.
+5. Se juega una sola vez: después, el portal lleva a la isla de forma local (`IslandArrivalSync.AlreadyPlayed`).
+
+El objeto de red **Mundo en línea** (`NetworkObject` + `IslandArrivalSync` + `PickupSync`) lo agrega el menú *Juegos Arcanos > 5*.
 
 ## Arcos y raquetas (`PickupSync`)
 
@@ -69,14 +71,20 @@ Al ser estado `[Networked]` y no un evento suelto, un peer que estaba ocupado lo
 
 ## Las pruebas
 
-Las cuatro pruebas se juegan juntas: cuando cualquier jugador llega a la entrada de una prueba, entran los cuatro al mismo tiempo. Todo vive en un objeto de red de la escena del juego, **Pruebas en línea** (`NetworkObject` + `TrialDirector` + una sincronización por prueba), que agrega el menú *Juegos Arcanos > 5*.
+Las cuatro pruebas se juegan juntas: cada jugador que llega a la entrada espera a los demás y entran todos al mismo tiempo. Todo vive en un objeto de red de la escena del juego, **Pruebas en línea** (`NetworkObject` + `TrialDirector` + una sincronización por prueba), que agrega el menú *Juegos Arcanos > 5*.
 
-### Entrar a una prueba (`TrialDirector`)
+### Punto de reunión y entrada a una prueba (`TrialDirector`)
 
-1. La entrada de cada prueba (`WorldEntrance2D` del templo, `PingPongTable`, el trigger de `SwimmingRace` y `ArtisticSwimmingEntrance`) llama a `OnlineTrials.TryRequest`. En el modo solo devuelve `false` y la prueba empieza como siempre; en línea le envía `RPC_RequestStart` al host y no hace nada más.
-2. El host acepta la petición solo si no hay otra prueba en curso: guarda `ActiveTrial` y sube el contador `Session` (los dos `[Networked]`).
-3. En `Render`, cada peer ve que `Session` cambió y le pide a la sincronización de esa prueba (`TrialSync.TryEnterLocally`) que entre. Si su mundo está ocupado (por ejemplo, en medio de un fundido), lo vuelve a intentar en cada frame durante 20 segundos.
-4. Cuando la prueba termina, el host llama a `OnlineTrials.Finished` y `ActiveTrial` vuelve a `None`.
+Ninguna prueba empieza hasta que llegan **todos los jugadores humanos** (los bots no se esperan).
+
+1. La entrada de cada prueba (`IslandTrip`, `WorldEntrance2D` del templo, `PingPongTable`, el trigger de `SwimmingRace` y `ArtisticSwimmingEntrance`) llama a `OnlineTrials.TryRequest`. En el modo solo devuelve `false` y la prueba empieza como siempre; en línea envía `RPC_ReportArrival(prueba, índice del mago)` al host.
+2. El host anota la llegada: `GatheringTrial` (la prueba que se está reuniendo) y `Arrived` (`NetworkArray<NetworkBool>`, uno por mago). Mientras haya una reunión abierta, ignora las llegadas a otra prueba distinta.
+3. Cada peer, en `Render`, mira ese estado: si su mago ya llegó muestra la **pantalla de espera** (`WaitingScreen`: el búho volando, cuántos magos están listos y quiénes faltan) y congela a su jugador; si todavía no llegó, el búho le avisa una vez dónde lo esperan.
+4. En `FixedUpdateNetwork`, cuando todos los humanos de la sala (`MageRoster.Slots`) están en `Arrived`, el host borra la reunión, pone `ActiveTrial` y `SessionTrial` y sube `Session`.
+5. Cada peer ve que `Session` cambió: quita la pantalla de espera, devuelve el control al jugador y le pide a la sincronización de esa prueba (`TrialSync.TryEnterLocally`) que entre. Si su mundo está ocupado (por ejemplo, en medio de un fundido), lo vuelve a intentar en cada frame durante 20 segundos.
+6. Cuando la prueba termina, el host llama a `OnlineTrials.Finished` y `ActiveTrial` vuelve a `None`. `SessionTrial` no se borra, para que un peer lento siga sabiendo a qué prueba entrar.
+
+Las pruebas terminadas no se repiten: la mesa de ping pong no hace nada si ya se ganó (`PingPongLevel.Won`), el portal del templo tampoco si ya se completó (`ElementalDoor.TempleCompleted`), y las sincronizaciones de esas pruebas tampoco entran.
 
 En línea no se puede salir de una prueba con Esc ni cambiar de mago con Tab, porque los demás siguen jugando. Las ayudas de pantalla de esas teclas se ocultan.
 
@@ -124,12 +132,12 @@ Las RPC de tiempo real (`RPC_MageState`, `RPC_Paddle`, `RPC_Hit`, `RPC_Stroke`, 
 | `MageAvatarState` de un jugador | el host, con el jugador como *input authority* | el dueño envía su pose por *input*; los demás la muestran en un títere |
 | `MageAvatarState` de un bot | el host | muestran al bot como títere |
 | Minotauro (`MinotaurSync`) | el host | muestran la posición interpolada; su IA está apagada |
-| Prueba en curso (`TrialDirector`) | el host | piden empezar una prueba por RPC y entran cuando cambia `Session` |
+| Punto de reunión y prueba en curso (`TrialDirector`) | el host anota quién llegó y decide cuándo empieza | avisan su llegada por RPC, esperan con la pantalla del búho y entran cuando cambia `Session` |
 | Carrera de natación (`SwimRaceSync`) | el host | envían sus brazadas y dibujan las distancias |
 | Natación artística (`ArtisticSwimmingSync`) | el host decide el inicio de cada figura y la precisión | cada uno juzga su carril y envía sus aciertos |
 | Ping pong (`PingPongSync`) | el host | mueven su paleta, piden golpes y dibujan el estado |
 | Templo 2D (`TempleSync`) | el dueño de cada mago | simulan su templo, repiten las órdenes de los magos ajenos y comparten los cambios del mundo |
-| Llegada a la isla (`IslandArrivalSync`) | el host (acepta solo la primera petición) | piden abrir el portal por RPC y empiezan la cinemática cuando cambia `Opened` |
+| Llegada a la isla (`IslandArrivalSync`) | el host, por medio del punto de reunión | empiezan la cinemática cuando salen todos |
 | Arcos y raquetas (`PickupSync`) | el host guarda qué se recogió | quien maneja el cuerpo lo recoge y avisa; los demás lo muestran sobre el títere |
 
 ## Estado replicado (`[Networked]`)
@@ -150,7 +158,7 @@ Los cambios se detectan en `Render` con un `ChangeDetector`, y la interfaz (`Lob
 | `MageRoster.RPC_ChooseMage` | cliente → host | el mago existe, nadie más lo tiene y la partida no empezó; quita el Listo |
 | `MageRoster.RPC_SetReady` | cliente → host | el que lo envía tiene puesto y un mago válido |
 | `MageAvatarState.RPC_Catch` | host → dueño del mago | el minotauro atrapó a ese jugador |
-| `TrialDirector.RPC_RequestStart` | cualquiera → host | se acepta solo si no hay otra prueba en curso |
+| `TrialDirector.RPC_ReportArrival` | cualquiera → host | anota la llegada de ese mago; se ignora si hay otra prueba en curso o reuniéndose |
 | `SwimRaceSync.RPC_Stroke` | cliente → host | una brazada en ese carril |
 | `ArtisticSwimmingSync.RPC_StartFigure` | host → todos | empieza la jugada N |
 | `ArtisticSwimmingSync.RPC_FigureResult` | host → todos | precisión de la jugada N |
@@ -159,7 +167,6 @@ Los cambios se detectan en `Render` con un `ChangeDetector`, y la interfaz (`Lob
 | `PingPongSync.RPC_Hit` | cliente → host | golpe a una bola concreta; el host lo valida |
 | `TempleSync.RPC_MageState` | dueño → todos | órdenes, posición, velocidad y vida de un mago |
 | `TempleSync.RPC_EnemyEliminated`, `RPC_CoinCollected`, `RPC_EventActivated`, `RPC_ZoneUsed`, `RPC_EncounterStarted`, `RPC_CircleLit`, `RPC_DoorCompleted` | cualquiera → todos | un cambio del mundo del templo |
-| `IslandArrivalSync.RPC_RequestOpen` | cualquiera → host | se acepta solo la primera vez; marca `Opened` y quién abrió |
 | `PickupSync.RPC_ReportPickup` | cualquiera → host | marca el arco o la raqueta de ese mago como recogido |
 
 Las de la sala son `RpcSources.All` → `RpcTargets.StateAuthority`: cualquiera puede enviarlas, pero solo se ejecutan en el host, que sabe quién la envió por `RpcInfo.Source`.
@@ -183,7 +190,8 @@ Las de la sala son `RpcSources.All` → `RpcTargets.StateAuthority`: cualquiera 
 | | `LobbyPanel`, `LobbySlotView` | sala de espera: puestos, elección de mago, Listo, Empezar, Salir |
 | | `MagePose`, `MageBody`, `MageAvatarState`, `MatchAvatarSpawner`, `LocalMageInputProvider` | los 4 magos sincronizados en el mundo 3D |
 | | `MinotaurSync`, `RemotePlayerPrey` | el minotauro controlado por el host |
-| | `OnlineTrial`, `OnlineTrials`, `OnlineMatch`, `TrialDirector`, `TrialSync` | entrar todos juntos a una prueba |
+| | `OnlineTrial`, `OnlineTrials`, `OnlineMatch`, `TrialDirector`, `TrialSync` | punto de reunión y entrar todos juntos a una prueba |
+| `Scripts/UI` | `WaitingScreen` | pantalla de espera con el búho volando (se crea por código con los sprites y fuentes del búho guía) |
 | | `SwimRaceSync` | carrera de natación |
 | | `ArtisticSwimmingSync` | natación artística |
 | | `PingPongSync`, `PingPongSnapshot` | ping pong |

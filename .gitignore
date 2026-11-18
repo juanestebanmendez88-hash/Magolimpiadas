@@ -2,8 +2,7 @@
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
-/[Bb]uilds/
-/[Bb]uilds2/
+/[Bb]uilds*/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 /[Mm]emoryCaptures/
@@ -43,3 +42,5 @@ crashlytics-build.properties
 
 .DS_Store
 Thumbs.db
+
+GUIA_DEFENSA.md
