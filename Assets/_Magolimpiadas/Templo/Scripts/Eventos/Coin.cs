@@ -15,9 +15,14 @@ public class Coin : MonoBehaviour
     public static event Action<Coin, Mage> AnyCollected;
 
     public static int For(MageData d) => d != null && counts.TryGetValue(d, out int n) ? n : 0;
+    public static bool ScoredByHost { get; set; }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    public static void RestartMatch() => counts.Clear();
+    public static void RestartMatch()
+    {
+        counts.Clear();
+        ScoredByHost = false;
+    }
 
     public static string Summary(out MageData winner)
     {
@@ -44,19 +49,34 @@ public class Coin : MonoBehaviour
         Collect(m);
     }
 
-    public void CollectFromNetwork(Mage m) => Collect(m);
+    public void CreditFromNetwork(Mage m)
+    {
+        if (m == null || m.data == null) return;
+        if (!collected) Take(m);
+        Count(m.data);
+    }
 
     void Collect(Mage m)
     {
         if (collected || m == null || m.data == null) return;
-        collected = true;
+        Take(m);
         AnyCollected?.Invoke(this, m);
-        counts[m.data] = For(m.data) + amountValue;
-        OnChange?.Invoke();
+        if (!ScoredByHost) Count(m.data);
+    }
+
+    void Take(Mage m)
+    {
+        collected = true;
         DamageNumbers.Message(transform.position + Vector3.up * 1.2f, "+" + amountValue, m.data.color);
         GameSound.Play(SoundSynthesizer.Star(), 0.35f, 1.1f);
         GetComponent<Collider2D>().enabled = false;
         start = transform.position;
+    }
+
+    void Count(MageData d)
+    {
+        counts[d] = For(d) + amountValue;
+        OnChange?.Invoke();
     }
 
     void Update()

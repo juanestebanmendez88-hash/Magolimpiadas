@@ -8,6 +8,7 @@ namespace ArcaneGames.Network
         private const float PaddleSendInterval = 0.05f;
 
         private readonly PingPongSnapshot hostSnapshot = new PingPongSnapshot();
+        private readonly bool[] tutorialRead = new bool[PingPongSnapshot.MaxMages];
         private PingPongLevel level;
         private float nextPaddleSend;
 
@@ -132,6 +133,23 @@ namespace ArcaneGames.Network
         public void MarkFinished()
         {
             OnlineTrials.Finished(Trial);
+        }
+
+        public void ReportTutorialRead(int mage)
+        {
+            RPC_TutorialRead(mage);
+        }
+
+        public bool HasReadTutorial(int mage)
+        {
+            return mage >= 0 && mage < tutorialRead.Length && tutorialRead[mage];
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.StateAuthority, TickAligned = false)]
+        public void RPC_TutorialRead(int mage)
+        {
+            if (mage >= 0 && mage < tutorialRead.Length)
+                tutorialRead[mage] = true;
         }
 
         [Rpc(RpcSources.All, RpcTargets.StateAuthority, Channel = RpcChannel.Unreliable, TickAligned = false)]

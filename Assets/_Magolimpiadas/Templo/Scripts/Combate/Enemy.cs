@@ -55,9 +55,20 @@ public class Enemy : MonoBehaviour
 
     static readonly Dictionary<MageData, int> bullseyes = new Dictionary<MageData, int>();
     public static int TargetsFor(MageData d) => d != null && bullseyes.TryGetValue(d, out int n) ? n : 0;
+    public static bool ScoredByHost { get; set; }
+    public static event Action<Enemy, Mage> AnyBullseyeHit;
+
+    public static void AddBullseye(MageData d)
+    {
+        if (d != null) bullseyes[d] = TargetsFor(d) + 1;
+    }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    public static void RestartMatch() => bullseyes.Clear();
+    public static void RestartMatch()
+    {
+        bullseyes.Clear();
+        ScoredByHost = false;
+    }
 
     public float RemainingBullseye => CurrentState == State.Bullseye ? bullseyeEnd - Time.time : 0f;
     bool breaking, dying;
@@ -151,7 +162,11 @@ public class Enemy : MonoBehaviour
         }
         if (CurrentState != State.Bullseye) return false;
         DamageNumbers.Message(Center + Vector2.up * 0.8f, "¡Eliminado!", shooter != null ? shooter.data.color : Color.white);
-        if (shooter != null && shooter.data != null) bullseyes[shooter.data] = TargetsFor(shooter.data) + 1;
+        if (shooter != null && shooter.data != null)
+        {
+            if (!ScoredByHost) AddBullseye(shooter.data);
+            else if (!shooter.IsNetworkReplica) AnyBullseyeHit?.Invoke(this, shooter);
+        }
         breaking = targetBreakFrames != null && targetBreakFrames.Length > 0;
         Eliminate();
         if (breaking)

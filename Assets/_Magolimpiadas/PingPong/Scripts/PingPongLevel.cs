@@ -232,10 +232,9 @@ public class PingPongLevel : MonoBehaviour
 
     void OnEnter()
     {
-        if (IsReplica) { phase = Phase.Ready; clickBlockedUntil = Time.time + 0.4f; return; }
-        if (online != null) { StartCoroutine(Begin()); return; }
+        if (IsReplica) { phase = Phase.Ready; clickBlockedUntil = Time.time + 0.4f; }
         if (!introSeen || !introOnlyFirstTime) introRoutine = StartCoroutine(Intro());
-        else StartCoroutine(Begin());
+        else StartCoroutine(AfterIntro());
     }
 
     void JumpIntro()
@@ -245,19 +244,19 @@ public class PingPongLevel : MonoBehaviour
         if (OwlNotice.Owl != null) OwlNotice.Owl.CloseNow();
         var tutorial = GetComponent<TutorialPingPong>();
         if (tutorial != null) tutorial.Hide();
-        StartCoroutine(Begin());
+        StartCoroutine(AfterIntro());
     }
 
     IEnumerator Intro()
     {
-        phase = Phase.Intro;
+        if (!IsReplica) phase = Phase.Intro;
         introSeen = true;
         var tutorial = GetComponent<TutorialPingPong>();
         if (tutorial != null)
         {
             yield return tutorial.Show(this, mages[captain]);
             introRoutine = null;
-            yield return Begin();
+            yield return AfterIntro();
             yield break;
         }
         var owl = OwlNotice.Owl;
@@ -269,7 +268,39 @@ public class PingPongLevel : MonoBehaviour
             yield return owl.Close();
         }
         introRoutine = null;
+        yield return AfterIntro();
+    }
+
+    IEnumerator AfterIntro()
+    {
+        if (online != null)
+        {
+            online.ReportTutorialRead(captain);
+            if (IsReplica)
+            {
+                if (online.Latest.Phase != (int)Phase.Game) message.text = WaitingTeamMessage;
+                clickBlockedUntil = Time.time + 0.4f;
+                yield break;
+            }
+            yield return WaitForTeam();
+        }
         yield return Begin();
+    }
+
+    IEnumerator WaitForTeam()
+    {
+        if (TeamReadTutorial()) yield break;
+        phase = Phase.Intro;
+        message.text = WaitingTeamMessage;
+        for (float t = 0f; t < TeamTutorialTimeout && !TeamReadTutorial(); t += Time.unscaledDeltaTime) yield return null;
+        message.text = "";
+    }
+
+    bool TeamReadTutorial()
+    {
+        for (int i = 0; i < mages.Count; i++)
+            if (IsRemoteHuman(i) && !online.HasReadTutorial(i)) return false;
+        return true;
     }
 
     public int Attempts { get; private set; }
@@ -326,15 +357,16 @@ public class PingPongLevel : MonoBehaviour
         if (phase == Phase.Outside) return;
         var k = Keyboard.current;
         var r = Mouse.current;
-        if (IsReplica) { ReplicaUpdate(k, r); return; }
-
-        if (phase == Phase.Intro)
+        bool skipped = false;
+        if (introRoutine != null)
         {
             var owl = OwlNotice.Owl;
             if (owl != null && owl.IsOpen) owl.Notice("Esc · saltar");
-            if (k != null && k.escapeKey.wasPressedThisFrame) JumpIntro();
+            if (k != null && k.escapeKey.wasPressedThisFrame) { JumpIntro(); skipped = true; }
         }
-        else if (online == null && k != null && k.escapeKey.wasPressedThisFrame) { Exit(); return; }
+        if (IsReplica) { ReplicaUpdate(k, r); return; }
+
+        if (!skipped && phase != Phase.Intro && online == null && k != null && k.escapeKey.wasPressedThisFrame) { Exit(); return; }
         if (online == null && phase != Phase.Intro && k != null && k.tabKey.wasPressedThisFrame) ChangeCaptain();
         if (phase == Phase.Game && Time.time > clickBlockedUntil &&
             ((r != null && r.leftButton.wasPressedThisFrame) || (k != null && k.spaceKey.wasPressedThisFrame)))
@@ -939,6 +971,8 @@ public class PingPongLevel : MonoBehaviour
     }
 
     const string WinMessage = "¡Ganaron!\n<size=60%>El Guardián del Olimpo se rinde ante los cuatro magos.</size>";
+    const string WaitingTeamMessage = "<size=55%>Esperando a que todos terminen el tutorial...</size>";
+    const float TeamTutorialTimeout = 90f;
     const int MagesWon = 1, GuardianWon = 2;
 
     void CelebrateWin()
@@ -1038,7 +1072,8 @@ public class PingPongLevel : MonoBehaviour
         var s = online.Latest;
         if (s.HasData && phase != Phase.End) ApplyReplicaState(s);
 
-        if (phase == Phase.Game && Time.time > clickBlockedUntil &&
+        bool reading = introRoutine != null;
+        if (!reading && phase == Phase.Game && Time.time > clickBlockedUntil &&
             ((r != null && r.leftButton.wasPressedThisFrame) || (k != null && k.spaceKey.wasPressedThisFrame)))
         {
             tClick = Time.unscaledTime;
@@ -1046,7 +1081,7 @@ public class PingPongLevel : MonoBehaviour
         }
         if (phase == Phase.Game && Time.unscaledTime - tClick <= clickMargin) TrySendHit();
 
-        MoveCaptain(k);
+        MoveCaptain(reading ? null : k);
         online.SendPaddle(captain, mages[captain].feet.y);
         for (int i = 0; i < mages.Count && i < s.PaddleY.Length; i++)
         {

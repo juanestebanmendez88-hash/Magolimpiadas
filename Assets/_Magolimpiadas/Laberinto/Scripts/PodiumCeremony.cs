@@ -101,7 +101,8 @@ public class PodiumCeremony : MonoBehaviour
             if (m == null || m.data == null) continue;
             rows.Add((Id(m.data.element), Enemy.TargetsFor(m.data), Coin.For(m.data)));
         }
-        var order = rows.OrderByDescending(f => f.bullseyes + f.coins).ThenByDescending(f => f.bullseyes).ToList();
+        var order = rows.OrderByDescending(f => f.bullseyes + f.coins).ThenByDescending(f => f.bullseyes)
+            .ThenBy(f => mages.FindIndex(m => m.id == f.id)).ToList();
         var table = order.Select(f => new Row { id = f.id, values = new[] { f.bullseyes.ToString(), f.coins.ToString(), (f.bullseyes + f.coins).ToString() } }).ToList();
         yield return Screens("Tiro con arco", bowMedals, new[] { "Dianas", "Monedas", "Total" }, table, true);
 

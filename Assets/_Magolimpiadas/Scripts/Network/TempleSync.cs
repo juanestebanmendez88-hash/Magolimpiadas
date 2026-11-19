@@ -16,6 +16,8 @@ namespace ArcaneGames.Network
         private readonly List<Mage> mages = new List<Mage>();
         private readonly List<bool> ownedMages = new List<bool>();
         private readonly List<MageNetworkState> pendingActions = new List<MageNetworkState>();
+        private readonly HashSet<int> creditedBullseyes = new HashSet<int>();
+        private readonly HashSet<int> creditedCoins = new HashSet<int>();
         private List<Enemy> enemies = new List<Enemy>();
         private List<Coin> coins = new List<Coin>();
         private List<LevelEvent> levelEvents = new List<LevelEvent>();
@@ -39,6 +41,7 @@ namespace ArcaneGames.Network
                 world.onReturnTo3D.AddListener(OnBackTo3D);
 
             Enemy.AnyEliminated += OnEnemyEliminated;
+            Enemy.AnyBullseyeHit += OnBullseyeHit;
             Coin.AnyCollected += OnCoinCollected;
             LevelEvent.AnyActivated += OnEventActivated;
             PowerZone.AnyUsed += OnZoneUsed;
@@ -53,12 +56,15 @@ namespace ArcaneGames.Network
                 world.onReturnTo3D.RemoveListener(OnBackTo3D);
 
             Enemy.AnyEliminated -= OnEnemyEliminated;
+            Enemy.AnyBullseyeHit -= OnBullseyeHit;
             Coin.AnyCollected -= OnCoinCollected;
             LevelEvent.AnyActivated -= OnEventActivated;
             PowerZone.AnyUsed -= OnZoneUsed;
             Encounter.AnyStarted -= OnEncounterStarted;
             ElementalCircle.AnyLit -= OnCircleLit;
             ElementalDoor.AnyCompleted -= OnDoorCompleted;
+            Enemy.ScoredByHost = false;
+            Coin.ScoredByHost = false;
         }
 
         public override bool TryEnterLocally()
@@ -90,6 +96,10 @@ namespace ArcaneGames.Network
             mages.Clear();
             ownedMages.Clear();
             pendingActions.Clear();
+            creditedBullseyes.Clear();
+            creditedCoins.Clear();
+            Enemy.ScoredByHost = true;
+            Coin.ScoredByHost = true;
             Mage localMage = null;
             foreach (Mage mage in characterSwitch.mages)
             {
@@ -238,11 +248,32 @@ namespace ArcaneGames.Network
                 ApplyRemote(() => enemies[index].EliminateFromNetwork());
         }
 
-        [Rpc(RpcSources.All, RpcTargets.All, TickAligned = false)]
-        public void RPC_CoinCollected(int index, int mage)
+        [Rpc(RpcSources.All, RpcTargets.StateAuthority, TickAligned = false)]
+        public void RPC_ClaimCoin(int index, int mage)
         {
-            if (configured && IsValidIndex(coins, index) && IsValidIndex(mages, mage))
-                ApplyRemote(() => coins[index].CollectFromNetwork(mages[mage]));
+            if (configured && IsValidIndex(coins, index) && IsValidIndex(mages, mage) && creditedCoins.Add(index))
+                RPC_CoinCredited(index, mage);
+        }
+
+        [Rpc(RpcSources.StateAuthority, RpcTargets.All, TickAligned = false)]
+        public void RPC_CoinCredited(int index, int mage)
+        {
+            if (IsValidIndex(coins, index) && IsValidIndex(mages, mage))
+                coins[index].CreditFromNetwork(mages[mage]);
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.StateAuthority, TickAligned = false)]
+        public void RPC_ClaimBullseye(int index, int mage)
+        {
+            if (configured && IsValidIndex(enemies, index) && IsValidIndex(mages, mage) && creditedBullseyes.Add(index))
+                RPC_BullseyeCredited(mage);
+        }
+
+        [Rpc(RpcSources.StateAuthority, RpcTargets.All, TickAligned = false)]
+        public void RPC_BullseyeCredited(int mage)
+        {
+            if (IsValidIndex(mages, mage))
+                Enemy.AddBullseye(mages[mage].data);
         }
 
         [Rpc(RpcSources.All, RpcTargets.All, TickAligned = false)]
@@ -295,7 +326,18 @@ namespace ArcaneGames.Network
             int coinIndex = coins.IndexOf(coin);
             int mageIndex = mages.IndexOf(mage);
             if (coinIndex >= 0 && mageIndex >= 0)
-                RPC_CoinCollected(coinIndex, mageIndex);
+                RPC_ClaimCoin(coinIndex, mageIndex);
+        }
+
+        private void OnBullseyeHit(Enemy enemy, Mage mage)
+        {
+            if (!CanBroadcast)
+                return;
+
+            int enemyIndex = enemies.IndexOf(enemy);
+            int mageIndex = mages.IndexOf(mage);
+            if (enemyIndex >= 0 && mageIndex >= 0)
+                RPC_ClaimBullseye(enemyIndex, mageIndex);
         }
 
         private bool CanBroadcast => configured && !applyingRemote && Object != null && Object.IsValid;
